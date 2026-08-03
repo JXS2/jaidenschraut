@@ -1,14 +1,10 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
-/**
- * TODO(content): Jaiden still needs to supply the real values for these two.
- * They are the placeholders carried over from the design handoff.
- */
-const GITHUB_URL = "https://github.com/";
-const LINKEDIN_URL = "https://www.linkedin.com/";
+const GITHUB_URL = "https://github.com/JXS2";
+const LINKEDIN_URL = "https://www.linkedin.com/in/jxschraut/";
 
-/** TODO(content): rent-a-rower has no live URL yet; it points at the GitHub placeholder. */
+/** TODO(content): rent-a-rower is a private repo with no public URL yet, so it falls back to the GitHub profile. */
 const RENT_A_ROWER_URL = GITHUB_URL;
 
 const EMAIL = "x.schraut@gmail.com";

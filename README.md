@@ -40,10 +40,10 @@ scale, and the project and photo grids reflow via `auto-fit`.
 
 ## Still needs real values
 
-- `GITHUB_URL` in `app/page.tsx` is the `https://github.com/` placeholder.
-- `LINKEDIN_URL` in `app/page.tsx` is the `https://www.linkedin.com/` placeholder.
-- `RENT_A_ROWER_URL` in `app/page.tsx` points at the GitHub placeholder; rent-a-rower has no
-  live URL yet.
+`GITHUB_URL` and `LINKEDIN_URL` in `app/page.tsx` are now Jaiden's real profiles.
+
+- `RENT_A_ROWER_URL` in `app/page.tsx` has no URL of its own yet: the repo is private, so the card
+  falls back to `GITHUB_URL` until there is something public to link to.
 - Every entry in `PUBLICATIONS` in `app/page.tsx` is a placeholder: each needs a real `title`,
   `venue`, `year`, and `url`. An entry whose `url` is `""` renders as plain text rather than a
   link, so entries without a public link still read correctly.
