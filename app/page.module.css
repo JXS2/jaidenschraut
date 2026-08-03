@@ -13,8 +13,8 @@
   gap: var(--section-gap);
 }
 
-/* Sections 2-4 sit inside <main>; it keeps the same rhythm as the page column
-   so the header, the three sections, and the footer share one even gap. */
+/* Sections 2-5 sit inside <main>; it keeps the same rhythm as the page column
+   so the header, the four sections, and the footer share one even gap. */
 .main {
   display: flex;
   flex-direction: column;
@@ -177,7 +177,58 @@
   color: var(--muted);
 }
 
-/* ------------------------------------------------------------ 3. currently */
+/* --------------------------------------------------------- 3. publications */
+
+/* Hairline rules rather than cards: publications carry no imagery, and the
+   rules keep this section legible between the project grid above and the
+   "Currently" plate below. */
+.publicationList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.publication {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.publicationTitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.publicationMeta {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* Entries that have a url render as whole-row links and take the same hover
+   language as the cards and footer links: rule and title shift to the accent.
+   The row has no radius of its own, so the global 3px focus ring is correct
+   here and needs no restating. */
+.publicationLink,
+.publicationLink:hover {
+  color: var(--ink);
+}
+
+.publicationLink:hover {
+  border-bottom-color: var(--accent);
+}
+
+.publicationLink:hover .publicationTitle {
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------------ 4. currently */
 
 .currently {
   display: flex;
@@ -201,7 +252,7 @@
   color: var(--accent);
 }
 
-/* -------------------------------------------------------- 4. off the clock */
+/* -------------------------------------------------------- 5. off the clock */
 
 .statement {
   margin: 0;
@@ -228,7 +279,7 @@
   background: var(--placeholder-ground);
 }
 
-/* --------------------------------------------------------------- 5. footer */
+/* --------------------------------------------------------------- 6. footer */
 
 .footer {
   display: flex;

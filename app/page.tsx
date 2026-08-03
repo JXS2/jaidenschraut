@@ -47,6 +47,25 @@ const projects = [
   },
 ];
 
+type Publication = {
+  title: string;
+  venue: string;
+  year: string;
+  /** Empty string renders the entry as plain text instead of a link. */
+  url: string;
+};
+
+/**
+ * TODO(content): every entry is a placeholder. Jaiden supplies the real
+ * title / venue / year / url per publication; replacing this array is the
+ * only edit the section needs.
+ */
+const PUBLICATIONS: Publication[] = [
+  { title: "[Publication title]", venue: "[Venue / where published]", year: "[Year]", url: "" },
+  { title: "[Publication title]", venue: "[Venue / where published]", year: "[Year]", url: "" },
+  { title: "[Publication title]", venue: "[Venue / where published]", year: "[Year]", url: "" },
+];
+
 const lifePhotos = [
   { image: "/photos/life-rowing.svg", alt: "Rowing on the water" },
   { image: "/photos/life-travel.svg", alt: "Travelling somewhere new" },
@@ -113,6 +132,39 @@ export default function Home() {
                 </a>
               ))}
             </div>
+          </section>
+
+          <section className={styles.section}>
+            <h2 className={styles.sectionLabel}>Publications</h2>
+            <ul className={styles.publicationList}>
+              {PUBLICATIONS.map((publication, index) => {
+                const body = (
+                  <>
+                    <span className={styles.publicationTitle}>{publication.title}</span>
+                    <p className={styles.publicationMeta}>
+                      {publication.venue} · {publication.year}
+                    </p>
+                  </>
+                );
+
+                return (
+                  <li key={index}>
+                    {publication.url ? (
+                      <a
+                        className={`${styles.publication} ${styles.publicationLink}`}
+                        href={publication.url}
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        {body}
+                      </a>
+                    ) : (
+                      <div className={styles.publication}>{body}</div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
           </section>
 
           <section className={styles.currently}>
