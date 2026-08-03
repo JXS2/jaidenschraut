@@ -1,0 +1,295 @@
+/* ---------------------------------------------------------------- page frame */
+
+.page {
+  min-height: 100vh;
+  padding: var(--page-padding-top) var(--page-padding-side) var(--page-padding-bottom);
+}
+
+.column {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+/* Sections 2-4 sit inside <main>; it keeps the same rhythm as the page column
+   so the header, the three sections, and the footer share one even gap. */
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+/* --------------------------------------------------------------- 1. header */
+
+.header {
+  display: flex;
+  gap: var(--header-gap);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.headerText {
+  flex: 1 1 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrowMark {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.eyebrowText {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(46px, 7.5vw, 74px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.intro {
+  margin: 0;
+  font-size: clamp(17px, 2vw, 19px);
+  line-height: 1.65;
+  color: var(--body);
+  max-width: 50ch;
+  text-wrap: pretty;
+}
+
+.portrait {
+  flex: 0 0 auto;
+  width: clamp(180px, 26vw, 248px);
+}
+
+.portraitFrame {
+  position: relative;
+  width: 100%;
+  height: clamp(220px, 32vw, 300px);
+  border-radius: var(--radius-image);
+  overflow: hidden;
+  background: var(--placeholder-ground);
+}
+
+/* ------------------------------------------------------------- 2. projects */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.sectionLabel {
+  margin: 0;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.card,
+.card:hover {
+  color: var(--ink);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--card-hover-shadow);
+}
+
+/* The global focus ring rounds plain inline links to 3px; a card keeps its own
+   radius so the outline traces the card edge. */
+.card:focus-visible {
+  border-radius: var(--radius-card);
+}
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  height: 172px;
+  background: var(--placeholder-ground);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 22px 24px;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.cardUrl {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.cardDescription {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------ 3. currently */
+
+.currently {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 24px 26px;
+  background: var(--card);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius-image) var(--radius-image) 0;
+}
+
+.currentlyText {
+  margin: 0;
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.6;
+  color: var(--body);
+  max-width: 52ch;
+}
+
+.currentlyLead {
+  color: var(--accent);
+}
+
+/* -------------------------------------------------------- 4. off the clock */
+
+.statement {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3.2vw, 32px);
+  line-height: 1.35;
+  color: var(--ink);
+  max-width: 34ch;
+}
+
+.photoRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.photoFrame {
+  position: relative;
+  width: 100%;
+  height: clamp(150px, 20vw, 200px);
+  border-radius: var(--radius-image);
+  overflow: hidden;
+  background: var(--placeholder-ground);
+}
+
+/* --------------------------------------------------------------- 5. footer */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.divider {
+  display: block;
+  height: 1px;
+  background: var(--line);
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+/* line-height 1.6 keeps the effective touch target at 44px: 24 + 9 + 9 + 2. */
+.footerLink {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+  line-height: 1.6;
+  padding: 9px 18px;
+  border-radius: var(--radius-link);
+  border: 1px solid var(--line);
+}
+
+.footerLink,
+.footerLink:hover {
+  color: var(--ink);
+}
+
+.footerLink:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.footerLink:focus-visible {
+  border-radius: var(--radius-link);
+}
+
+.footerLinkEmail,
+.footerLinkEmail:hover {
+  color: var(--accent);
+}
+
+.footerLinkEmail {
+  border-color: var(--accent);
+}
+
+.footerLinkEmail:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* --------------------------------------------------------------- shared */
+
+.cover {
+  object-fit: cover;
+}
