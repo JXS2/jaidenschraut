@@ -2,8 +2,8 @@
 
 Personal website for Jaiden Schraut. Next.js (App Router, TypeScript), deployed on Vercel.
 
-A single static page in five sections: header, projects, currently, off the clock, footer links.
-No backend, no CMS, no client state.
+A single static page in six sections: header, projects, publications, currently, off the clock,
+footer links. No backend, no CMS, no client state.
 
 ## Running locally
 
@@ -44,6 +44,9 @@ scale, and the project and photo grids reflow via `auto-fit`.
 - `LINKEDIN_URL` in `app/page.tsx` is the `https://www.linkedin.com/` placeholder.
 - `RENT_A_ROWER_URL` in `app/page.tsx` points at the GitHub placeholder; rent-a-rower has no
   live URL yet.
+- Every entry in `PUBLICATIONS` in `app/page.tsx` is a placeholder: each needs a real `title`,
+  `venue`, `year`, and `url`. An entry whose `url` is `""` renders as plain text rather than a
+  link, so entries without a public link still read correctly.
 - All six photos in `public/photos/` are neutral placeholders on the design's placeholder ground.
   They sit in boxes fixed by CSS, so replacing a file (or pointing its `src` at a real WebP/AVIF)
   needs no layout change. Export at 2x the CSS box.

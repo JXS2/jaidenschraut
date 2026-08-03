@@ -21,6 +21,10 @@ prototypes wrapped by `support.js` / `image-slot.js`; never copy those into prod
 Every token from that spec lives as a `:root` custom property in `app/globals.css`. Change values
 there, not inline.
 
+One section is not in that spec: **Publications**, added later at Jaiden's request and built only
+from existing tokens. Treat it like the handed-off sections and extend it in the same language
+rather than inventing new values.
+
 ## Sharp edges
 
 - The global `a:focus-visible` rule sets `border-radius: 3px` so the focus ring hugs inline links.
