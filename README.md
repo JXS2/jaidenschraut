@@ -82,9 +82,9 @@ Once the last two placeholders are gone, the three `images` lines in `next.confi
 SVG can go.
 
 The publications entry carries Fig. 1 of the paper itself, at
-`public/publications/unet-architecture.png`. The paper is Jaiden's own and open access under
-CC BY 4.0, so reusing its artwork is fine; the plate is capped well short of the column so it
-reads as a specimen of the work rather than a hero image.
+`public/publications/unet-architecture.png`, in the same 64px tile the project rows use. The
+paper is Jaiden's own and open access under CC BY 4.0, so reusing its artwork is fine. A figure
+is wide rather than square, so it is fitted into the tile rather than cropped to fill it.
 
 Both projects link only to their live site (`theslash.app`, `rent-a-rower.com`); both repositories
 are private, so neither row carries a repository link.
