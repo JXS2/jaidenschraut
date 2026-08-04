@@ -32,6 +32,10 @@ it like the handed-off sections and extend it in the same language rather than i
   the ring will square it off. See `app/page.module.css`.
 - Footer links carry `min-height: 44px` purely to reach the spec's minimum touch height. This is
   the one place the render intentionally differs from the prototype (~40px there).
+- A project row's 64px box has two treatments, picked on `thumb.kind` in `app/page.tsx`:
+  `.rowThumbImage` (real art, edge to edge, no ground so an icon's own corners stay clean) and
+  `.rowThumbMark` (a drawn mark, inset on the card ground with a hairline border). The narrow
+  breakpoint's padding tweak belongs to the mark variant only.
 - A project row's title link is stretched over the whole row with `::after { inset: 0 }`, so the
   hover ground and the click target are one shape. Anything else clickable in a row needs
   `position: relative; z-index: 1` (see `.rowLink`) or the overlay swallows it.

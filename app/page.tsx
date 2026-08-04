@@ -37,9 +37,9 @@ type ArtifactLink = {
 };
 
 /**
- * What sits in a row's 64px box. Both projects carry a mark rather than a
- * screenshot: neither site says anything legible at that size. Swapping a
- * drawn mark for real art later is a change of `kind` and nothing else.
+ * What sits in a row's 64px box. `image` is art that owns the whole tile and
+ * fills it edge to edge; a drawn mark sits inset on the card ground instead.
+ * The two treatments are `.rowThumbImage` and `.rowThumbMark`.
  */
 type Thumb =
   | { kind: "image"; src: string; alt: string }
@@ -74,13 +74,19 @@ const PROJECTS: Project[] = [
       "Came out of rowing — a small tool for connecting rowers with people who need a hand.",
     year: "2024",
     href: "https://rent-a-rower.com",
-    thumb: { kind: "oar", label: "An oar" },
+    thumb: {
+      kind: "image",
+      src: "/thumbs/rent-a-rower-logo.png",
+      alt: "The rent-a-rower logo",
+    },
     links: [{ label: "live → rent-a-rower.com", href: "https://rent-a-rower.com" }],
   },
 ];
 
 type Publication = {
   title: string;
+  /** The full author list, in citation order; Jaiden is first author. */
+  authors: string;
   venue: string;
   year: string;
   /** Empty string renders the entry as plain text instead of a link. */
@@ -91,6 +97,7 @@ const PUBLICATIONS: Publication[] = [
   {
     title:
       "A multi-output network with U-net enhanced class activation map and robust classification performance for medical imaging analysis",
+    authors: "JX Schraut, L Liu, J Gong, Y Yin",
     venue: "First author · Discover Artificial Intelligence",
     year: "2023",
     url: "https://doi.org/10.1007/s44163-022-00045-1",
@@ -165,22 +172,24 @@ export default function Home() {
               key={project.title}
               className={`${styles.row} ${project.href ? styles.rowLinked : ""}`}
             >
-              {/* A mark, not a photo: it sits inset on the card ground rather
-                  than bleeding to the edges of the box. */}
-              <div className={`${styles.rowThumb} ${styles.rowThumbMark}`}>
-                {project.thumb.kind === "image" ? (
+              {/* Real art owns the whole tile and bleeds to its edges; a drawn
+                  mark sits inset on the card ground instead. */}
+              {project.thumb.kind === "image" ? (
+                <div className={`${styles.rowThumb} ${styles.rowThumbImage}`}>
                   <Image
                     src={project.thumb.src}
                     alt={project.thumb.alt}
                     width={128}
                     height={128}
-                    sizes="46px"
-                    className={styles.markArt}
+                    sizes="(max-width: 680px) 52px, 64px"
+                    className={styles.thumbArt}
                   />
-                ) : (
+                </div>
+              ) : (
+                <div className={`${styles.rowThumb} ${styles.rowThumbMark}`}>
                   <OarMark className={styles.markArt} label={project.thumb.label} />
-                )}
-              </div>
+                </div>
+              )}
               <div>
                 <h3 className={styles.rowTitle}>
                   {project.href ? (
@@ -227,6 +236,7 @@ export default function Home() {
               <>
                 <div>
                   <p className={styles.pubTitle}>{publication.title}</p>
+                  <p className={styles.pubAuthors}>{publication.authors}</p>
                   <p className={styles.pubVenue}>{publication.venue}</p>
                 </div>
                 <p className={styles.pubYear}>{publication.year}</p>

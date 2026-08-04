@@ -31,7 +31,7 @@ npm run typecheck  # tsc --noEmit
 | `app/globals.css` | Design tokens as `:root` custom properties, plus base and link styles |
 | `app/page.module.css` | Section-by-section layout |
 | `app/resume-dialog.tsx` | The résumé pop-up — the page's only client component |
-| `app/oar-mark.tsx` | The drawn oar used as the rent-a-rower thumbnail |
+| `app/oar-mark.tsx` | A drawn oar, kept as the inset-mark thumbnail variant; no row uses it |
 | `public/` | `portrait.jpg`, `resume.pdf`, `gallery/`, `thumbs/` — the real assets |
 | `public/photos/` | Placeholder art for the four gallery slots still without a photo |
 | `scripts/generate-placeholders.mjs` | Regenerates that placeholder art |
@@ -74,10 +74,11 @@ Replacing the résumé is a matter of overwriting `public/resume.pdf`.
 - **`HEADER_META`.** "SF / remote" and "Open to roles" came over from the approved mockup and are
   not yet confirmed. They are claims about Jaiden, so they need a yes before they go live.
 
-Both project thumbnails are marks rather than screenshots — neither site says anything legible at
-64px. Slash uses its own app icon, lifted from `theslash.app`; rent-a-rower uses the oar drawn in
-`app/oar-mark.tsx`. Either can become a photo by switching that row's `thumb` to
-`{ kind: "image", src, alt }`.
+Both project thumbnails are the projects' own logos rather than screenshots — neither site says
+anything legible at 64px. Slash uses its app icon from `theslash.app`; rent-a-rower uses the oar
+mark it serves at `rent-a-rower.com/logo.png`. A `thumb` of `kind: "image"` fills its box edge to
+edge; `app/oar-mark.tsx` is the drawn fallback that the inset treatment still exists for, and no
+row uses it now.
 
 Once the last four placeholders are gone, the three `images` lines in `next.config.ts` that allow
 SVG can go.
