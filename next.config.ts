@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // The six photo slots currently hold locally authored SVG placeholders.
-    // Once Jaiden's real photos (WebP/AVIF) land in /public/photos these three
+    // Four gallery tiles still hold locally authored SVG placeholders. Once
+    // Jaiden's remaining photos land and /public/photos is empty, these three
     // lines can be dropped.
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
