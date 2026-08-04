@@ -18,27 +18,9 @@
   border-bottom: 1px solid var(--line);
 }
 
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--accent);
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.eyebrowMark {
-  display: block;
-  flex: 0 0 auto;
-  width: 22px;
-  height: 2px;
-  background: var(--accent);
-}
-
+/* The name opens the header, so it sits flush with the portrait beside it. */
 .name {
-  margin: 12px 0 0;
+  margin: 0;
   /* The serif ships one weight, so the mockup's optical 500 is the 400 face. */
   font-family: var(--font-display);
   font-weight: 400;
