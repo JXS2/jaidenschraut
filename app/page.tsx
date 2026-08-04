@@ -55,7 +55,7 @@ const PROJECTS: Project[] = [
   {
     title: "Slash",
     description: "Unreleased app, due Fall 2026.",
-    year: "2025",
+    year: "2026",
     href: "https://theslash.app",
     thumb: { kind: "image", src: "/thumbs/slash-logo.png", alt: "The Slash app icon" },
     links: [{ label: "live → theslash.app", href: "https://theslash.app" }],
@@ -63,7 +63,7 @@ const PROJECTS: Project[] = [
   {
     title: "Rent-a-Rower",
     description: "Attempting to optimize fundraising for collegiate rowing teams.",
-    year: "2024",
+    year: "2026",
     href: "https://rent-a-rower.com",
     thumb: {
       kind: "image",
@@ -133,10 +133,6 @@ export default function Home() {
     <div className={styles.page}>
       <header className={styles.header}>
         <div>
-          <p className={styles.eyebrow}>
-            <span className={styles.eyebrowMark} aria-hidden="true" />
-            Consultant at Lovelytics
-          </p>
           <h1 className={styles.name}>Jaiden Schraut</h1>
           <p className={styles.lede}>{INTRO}</p>
           <ul className={styles.headerMeta}>
