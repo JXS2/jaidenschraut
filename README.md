@@ -51,6 +51,11 @@ The education index carries only what `public/resume.pdf` states for the credent
 plus the year each school was finished and the school's own mark in the shared 64px tile. It has
 the same three-column shape as the two indexes above it.
 
+A `HEADER_META` entry may carry `marks`: company logos set at 16px on the entry's own line, next
+to the words. "Currently — Lovelytics" carries two, Lovelytics and Databricks, because Lovelytics
+is a Databricks company. Both are official marks, kept as SVG under `public/thumbs/`; see "The
+company marks" below.
+
 ## The résumé pop-up
 
 The footer's "Résumé" button opens `public/resume.pdf` in a modal rather than downloading it or
@@ -86,3 +91,19 @@ is wide rather than square, so it is fitted into the tile rather than cropped to
 
 Both projects link only to their live site (`theslash.app`, `rent-a-rower.com`); both repositories
 are private, so neither row carries a repository link.
+
+## The company marks
+
+`public/thumbs/lovelytics.svg` and `public/thumbs/databricks.svg` are the two companies' own
+isotypes — the wordless glyph, not the lockup — lifted from the vector each company publishes and
+cropped to the mark's own bounding box, so nothing is redrawn and nothing is traced.
+Lovelytics' comes from the colour logo on `lovelytics.com`; Databricks' is the red logomark out of
+the nav logo on `databricks.com`.
+
+They are SVG on purpose. Next 16 serves an `.svg` `src` straight from `public/` rather than
+through `/_next/image`, so the marks stay vector at every density and `dangerouslyAllowSVG` stays
+off. A raster mark here would go through the optimizer and soften at 16px. Both marks are trusted,
+first-party-sourced files with no script or external reference in them; keep it that way.
+
+The marks carry each company's own colours, the way every other third-party mark on the page does.
+Nothing in `app/globals.css` changes for them.

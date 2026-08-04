@@ -13,10 +13,38 @@ const INTRO =
 const STATEMENT =
   "Rowing, geopolitics, tea, beach volleyball — and travelling whenever I can.";
 
+/**
+ * A company mark that sits on a meta entry's own line. Far too small for the
+ * index tile's ground and hairline — at this size a plate reads as noise, so a
+ * mark published on transparency sits bare on the page's paper instead.
+ */
+type MetaMark = {
+  src: string;
+  /**
+   * Empty where the entry's text already names the company: the mark would
+   * otherwise be read out immediately after the word it repeats.
+   */
+  alt: string;
+  /**
+   * The mark's own proportion, so the line reserves the right width for it
+   * before it loads. The rendered height comes from `.metaMark`, not from here.
+   */
+  width: number;
+  height: number;
+};
+
 /** Both entries are confirmed claims about Jaiden; the first carries the weight. */
-const HEADER_META: { text: string; strong?: boolean }[] = [
+const HEADER_META: { text: string; strong?: boolean; marks?: MetaMark[] }[] = [
   { text: "Chicago", strong: true },
-  { text: "Currently — Lovelytics" },
+  {
+    text: "Currently — Lovelytics",
+    marks: [
+      { src: "/thumbs/lovelytics.svg", alt: "", width: 130, height: 109 },
+      /* Lovelytics is a Databricks company, which is the one thing the two
+         marks say that the line's text does not — so this one is named. */
+      { src: "/thumbs/databricks.svg", alt: "a Databricks company", width: 28, height: 30 },
+    ],
+  },
 ];
 
 /**
@@ -198,8 +226,27 @@ export default function Home() {
           <p className={styles.lede}>{INTRO}</p>
           <ul className={styles.headerMeta}>
             {HEADER_META.map((item) => (
-              <li key={item.text} className={item.strong ? styles.headerMetaStrong : undefined}>
+              <li
+                key={item.text}
+                className={`${styles.headerMetaItem} ${
+                  item.strong ? styles.headerMetaStrong : ""
+                }`}
+              >
                 {item.text}
+                {item.marks && (
+                  <span className={styles.metaMarks}>
+                    {item.marks.map((mark) => (
+                      <Image
+                        key={mark.src}
+                        src={mark.src}
+                        alt={mark.alt}
+                        width={mark.width}
+                        height={mark.height}
+                        className={styles.metaMark}
+                      />
+                    ))}
+                  </span>
+                )}
               </li>
             ))}
           </ul>
