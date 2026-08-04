@@ -49,14 +49,18 @@ a hairline on cream vanishes at 16px).
 - `--font-ibm-plex-mono` sets `adjustFontFallback: false`. The Google latin subset has no arrows
   block, so the "live →" glyph always comes from the fallback, and the metric-adjusted fallback
   stretched it. Keep the plain system-mono fallback unless that glyph goes away.
-- `next.config.ts` enables `dangerouslyAllowSVG` only because two gallery tiles still hold
-  locally authored SVG placeholders. Remove it once the last real photos land.
+- Every image slot holds a real raster photo now, so `next.config.ts` carries no `images` config
+  and `dangerouslyAllowSVG` is gone. An SVG passed to `next/image` would need it back; prefer a
+  photo, or an inline component the way `app/oar-mark.tsx` is one, over re-enabling it.
 - The gallery leaves cells of the bottom row empty at desktop width, and does so at whatever tile
   count it currently holds. That is the handoff's own arrangement and CSS, not a regression; do
   not "fix" the mosaic. Jaiden adds and removes tiles as photos arrive.
 - A publication row is one link over the whole citation, thumbnail included, rather than a row
   with a stretched link inside it the way a project row is. So its tile art is decorative
   (`alt=""`): anything else there is read out ahead of the title that names the entry.
+- The education index (`.eduRow`) is the one index with no 64px tile, so its rows start at the
+  column the other indexes' thumbnails start at rather than at their text. That is deliberate: a
+  school has no artwork, and an empty box reads as a thumbnail that failed to load.
 - `.rowThumbPlate` is the third tile treatment, for real art that cannot fill the square, such as
   the publication's wide figure. It keeps `.rowThumb`'s size and framing and swaps the placeholder
   ground for paper white, so a fitted (not cropped) figure still reads as one filled tile.
