@@ -13,27 +13,32 @@ The page is a **recreation, not a redesign**. Colors, typography, spacing, radii
 are final and were specified externally; do not "improve" copy or layout without Jaiden asking.
 
 The handoff bundle lives outside the repo (it is deliberately not committed) at
-`/Users/jxschraut/firstmate/data/jaidenschraut-handoff/` — `README.md` there is the binding spec
-and `Jaiden Schraut v2.dc.html` is the light-theme visual reference. The `.dc.html` files are
-prototypes wrapped by `support.js` / `image-slot.js`; never copy those into production.
-`Jaiden Schraut.dc.html` is an earlier dark version and is not implemented.
+`/Users/jxschraut/firstmate/data/jaidenschraut-handoff/`.
+The binding reference is now `dense-variant.html` there: the approved **dense, index-forward**
+layout that this site implements, and the file to check a spacing or type value against.
+`README.md` in that bundle and `Jaiden Schraut v2.dc.html` describe the earlier airy layout that
+the dense one superseded; they still define the palette and the a11y conventions, but not the
+layout. The `.dc.html` files are prototypes wrapped by `support.js` / `image-slot.js`; never copy
+those into production. `Jaiden Schraut.dc.html` is an earlier dark version and is not implemented.
 
-Every token from that spec lives as a `:root` custom property in `app/globals.css`. Change values
-there, not inline.
-
-One section is not in that spec: **Publications**, added later at Jaiden's request and built only
-from existing tokens. Treat it like the handed-off sections and extend it in the same language
-rather than inventing new values.
+Every token lives as a `:root` custom property in `app/globals.css`. Change values there, not
+inline. **Publications** is the one section in no external spec, added at Jaiden's request; treat
+it like the handed-off sections and extend it in the same language rather than inventing values.
 
 ## Sharp edges
 
 - The global `a:focus-visible` rule sets `border-radius: 3px` so the focus ring hugs inline links.
-  Any link that has its own radius (project cards, footer links) must restate it in a
-  `:focus-visible` rule or the ring will square it off. See `app/page.module.css`.
-- Footer links use `line-height: 1.6` with `display: inline-flex` purely to reach the spec's
-  44px minimum touch height. This is the one place the render intentionally differs from the
-  prototype (39px there).
-- `next.config.ts` enables `dangerouslyAllowSVG` only because the six photo slots currently hold
+  Any link that has its own radius (footer links) must restate it in a `:focus-visible` rule or
+  the ring will square it off. See `app/page.module.css`.
+- Footer links carry `min-height: 44px` purely to reach the spec's minimum touch height. This is
+  the one place the render intentionally differs from the prototype (~40px there).
+- A project row's title link is stretched over the whole row with `::after { inset: 0 }`, so the
+  hover ground and the click target are one shape. Anything else clickable in a row needs
+  `position: relative; z-index: 1` (see `.rowLink`) or the overlay swallows it.
+- `--font-ibm-plex-mono` sets `adjustFontFallback: false`. The Google latin subset has no arrows
+  block, so the "live →" glyph always comes from the fallback, and the metric-adjusted fallback
+  stretched it. Keep the plain system-mono fallback unless that glyph goes away.
+- `next.config.ts` enables `dangerouslyAllowSVG` only because the nine photo slots currently hold
   locally authored SVG placeholders. Remove it once real photos land.
 
 ## Maintaining this file

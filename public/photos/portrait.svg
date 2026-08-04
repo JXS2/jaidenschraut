@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="496" height="600" viewBox="0 0 496 600" role="presentation">
-  <rect width="496" height="600" fill="#efebe2"/>
-  <text x="50%" y="50%" fill="#a29a8b" font-family="'IBM Plex Sans', system-ui, sans-serif" font-size="22" letter-spacing="2.6" text-anchor="middle" dominant-baseline="middle">PORTRAIT</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="236" height="284" viewBox="0 0 236 284" role="presentation">
+  <rect width="236" height="284" fill="#efebe2"/>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="#b3aa98" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="20" letter-spacing="1.6">PORTRAIT</text>
 </svg>

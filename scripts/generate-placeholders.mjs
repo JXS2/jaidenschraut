@@ -1,9 +1,9 @@
 /**
  * Regenerates the neutral placeholder art in `public/photos`.
  *
- * These stand in for the six real photos Jaiden will supply. They use the
- * design's placeholder ground (`#efebe2`) and match the CSS box of each slot at
- * 2x, so dropping in real photos later needs no layout change.
+ * These stand in for the real photos Jaiden will supply. They use the design's
+ * placeholder ground (`--placeholder-ground`) and match the CSS box of each
+ * slot at 2x, so dropping in real photos later needs no layout change.
  *
  * Run with: node scripts/generate-placeholders.mjs
  */
@@ -12,22 +12,31 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const GROUND = "#efebe2";
-const LABEL = "#a29a8b";
+const LABEL = "#b3aa98";
 
-/** Each entry is 2x the maximum CSS box of its slot. */
+/** Each entry is 2x the CSS box of its slot. */
 const slots = [
-  { file: "portrait.svg", width: 496, height: 600, label: "portrait" },
-  { file: "slash.svg", width: 900, height: 344, label: "slash screenshot" },
-  { file: "rent-a-rower.svg", width: 900, height: 344, label: "rent-a-rower screenshot" },
-  { file: "life-rowing.svg", width: 600, height: 400, label: "rowing" },
-  { file: "life-travel.svg", width: 600, height: 400, label: "travel" },
-  { file: "life-tea.svg", width: 600, height: 400, label: "tea" },
+  { file: "portrait.svg", width: 236, height: 284, label: "portrait" },
+  { file: "slash.svg", width: 128, height: 128, label: "slash", fontSize: 18 },
+  { file: "rent-a-rower.svg", width: 128, height: 128, label: "rower", fontSize: 18 },
+  { file: "life-rowing.svg", width: 360, height: 496, label: "rowing" },
+  { file: "life-tea.svg", width: 360, height: 240, label: "tea" },
+  { file: "life-volleyball.svg", width: 360, height: 240, label: "volleyball" },
+  { file: "life-kyoto.svg", width: 360, height: 240, label: "travel — kyoto" },
+  { file: "life-alps.svg", width: 360, height: 496, label: "travel — alps" },
+  { file: "life-regatta.svg", width: 360, height: 240, label: "a regatta" },
 ];
 
-const svg = ({ width, height, label }) =>
+/**
+ * The label is centred rather than tucked into a corner. Every slot is
+ * `object-fit: cover`, so a slot whose box is a different shape from its file
+ * crops symmetrically from the edges; a centred label survives that, a corner
+ * one gets sliced off at narrow widths.
+ */
+const svg = ({ width, height, label, fontSize = 20 }) =>
   `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="presentation">
   <rect width="${width}" height="${height}" fill="${GROUND}"/>
-  <text x="50%" y="50%" fill="${LABEL}" font-family="'IBM Plex Sans', system-ui, sans-serif" font-size="22" letter-spacing="2.6" text-anchor="middle" dominant-baseline="middle">${label.toUpperCase()}</text>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="${LABEL}" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="${fontSize}" letter-spacing="${(fontSize * 0.08).toFixed(1)}">${label.toUpperCase()}</text>
 </svg>
 `;
 
