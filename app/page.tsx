@@ -109,36 +109,60 @@ type School = {
   /** The degree, where there is one. A high school carries only its level. */
   credential: string;
   location: string;
-  /** Empty string leaves the row without a date rather than guessing one. */
-  date: string;
+  /** The year the school was finished, in the index's year column. */
+  year: string;
+  /**
+   * The school's own mark, in the index's shared 64px box. `kind` picks the
+   * tile treatment the work index already uses: `image` for a mark that brings
+   * its own ground, `mark` for one published on transparency, which needs the
+   * tile's. It carries no alt: the heading beside it already names the school.
+   */
+  logo: { src: string; kind: "image" | "mark" };
 };
 
 /**
- * Straight from `public/resume.pdf`, and only what it states: no GPA, no
- * honours, and no dates the résumé doesn't carry.
+ * Credentials and places are straight from `public/resume.pdf`, and only what
+ * it states: no GPA and no honours. The years are the years each school was
+ * finished, so the index reads down its year column the way the two above it do.
  */
 const EDUCATION: School[] = [
   {
     name: "University of Michigan",
     credential: "Bachelor of Science, Data Science",
     location: "Ann Arbor, MI",
-    date: "May 2026",
+    year: "2026",
+    logo: { src: "/thumbs/michigan-m.svg", kind: "image" },
   },
   {
     name: "Crystal Lake Central",
     credential: "High school",
     location: "Crystal Lake, IL",
-    date: "",
+    year: "2022",
+    /* The Tigers head the school itself publishes, on its own transparent
+       ground, so the tile supplies one. */
+    logo: { src: "/thumbs/crystal-lake-central.png", kind: "mark" },
   },
 ];
 
 /**
- * Every tile is now a real photo. `tall` doubles a tile's height; the grid
- * reflows around whatever mix of tiles it is given, so a new photo is one more
- * entry here and nothing else. Portrait shots want `tall`, so `cover` crops
- * their width rather than their subject.
+ * A tile in the mosaic. `tall` doubles a tile's height. `fit` shows the photo
+ * whole on the tile ground rather than cropping it to the tile, and takes the
+ * doubled height with it so the row it sits in still runs level.
  */
-const GALLERY = [
+type GalleryTile = {
+  image: string;
+  alt: string;
+  tall: boolean;
+  fit?: boolean;
+};
+
+/**
+ * Every tile is a real photo. The grid reflows around whatever mix of tiles it
+ * is given, so a new photo is one more entry here and nothing else. Portrait
+ * shots want `tall`, so `cover` crops their width rather than their subject; a
+ * wide shot whose subject runs the full frame wants `fit` instead.
+ */
+const GALLERY: GalleryTile[] = [
   {
     image: "/gallery/rowing-trophy.jpg",
     alt: "Holding the ACRA national championship team points trophy at the regatta site",
@@ -153,6 +177,7 @@ const GALLERY = [
     image: "/gallery/rowing-pair.jpg",
     alt: "Two rowers in a pair, blades buried, on race day",
     tall: false,
+    fit: true,
   },
 ];
 
@@ -310,16 +335,28 @@ export default function Home() {
             <span className={styles.sectionCount}>{count(EDUCATION)}</span>
           </div>
           {EDUCATION.map((school) => (
-            /* The same index row as the two above it, without the tile: there
-               is no artwork for a school, and an empty 64px box would read as a
-               thumbnail that failed to load. */
+            /* The same index row as the two above it: the school's own mark in
+               the shared 64px box, the entry beside it, the year last. */
             <div key={school.name} className={styles.eduRow}>
+              <div
+                className={`${styles.rowThumb} ${
+                  school.logo.kind === "image" ? styles.rowThumbImage : styles.rowThumbMark
+                }`}
+              >
+                <Image
+                  src={school.logo.src}
+                  alt=""
+                  fill
+                  sizes="(max-width: 680px) 52px, 64px"
+                  className={school.logo.kind === "image" ? styles.cover : styles.markArt}
+                />
+              </div>
               <div>
                 <h3 className={styles.eduSchool}>{school.name}</h3>
                 <p className={styles.eduCredential}>{school.credential}</p>
                 <p className={styles.eduLocation}>{school.location}</p>
               </div>
-              {school.date ? <p className={styles.eduDate}>{school.date}</p> : null}
+              <p className={styles.eduYear}>{school.year}</p>
             </div>
           ))}
         </section>
@@ -334,14 +371,16 @@ export default function Home() {
             {GALLERY.map((tile) => (
               <div
                 key={tile.image}
-                className={`${styles.galleryTile} ${tile.tall ? styles.galleryTileTall : ""}`}
+                className={`${styles.galleryTile} ${tile.tall ? styles.galleryTileTall : ""} ${
+                  tile.fit ? styles.galleryTileFit : ""
+                }`}
               >
                 <Image
                   src={tile.image}
                   alt={tile.alt}
                   fill
-                  sizes="(max-width: 680px) 50vw, 260px"
-                  className={styles.cover}
+                  sizes="(max-width: 680px) 50vw, 320px"
+                  className={tile.fit ? styles.contain : styles.cover}
                 />
               </div>
             ))}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!--
+    The Michigan block M, redrawn as one path rather than lifted from a brand
+    file. The glyph is authored in its own 240x169 box and placed by the
+    transform, so the geometry stays readable: the slab serifs are the steps at
+    y=47 and y=126, the notch drops to the centre at y=70, and the wedge runs
+    on to its point at y=138. Maize and blue are the university's own values.
+  -->
+  <rect width="512" height="512" fill="#00274C"/>
+  <path
+    fill="#FFCB05"
+    transform="translate(71 126) scale(1.54)"
+    d="M0 0H69L120 70L171 0H240V47H221V126H240V169H153V126H173V64L120 138L67 64V126H87V169H0V126H19V47H0Z"
+  />
+</svg>

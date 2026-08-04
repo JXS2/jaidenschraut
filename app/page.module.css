@@ -177,8 +177,9 @@
   background: var(--card);
 }
 
-/* A thumbnail holding a drawn mark rather than art. The card ground and the
-   inset are what stop a bare mark reading as a cropped image. */
+/* A thumbnail holding a mark that brings no ground of its own: one drawn here,
+   or a logo published on transparency, such as the high school's. The card
+   ground and the inset are what stop a bare mark reading as a cropped image. */
 .rowThumbMark {
   display: grid;
   place-items: center;
@@ -319,13 +320,11 @@
 
 /* ----------------------------------------------------------- 5. education */
 
-/* The index language again, minus the 64px tile: a school has no artwork, and
-   an empty box would read as a thumbnail that failed to load. The name, the
-   credential, and the place run down the left; the date sits where the year
-   and the publication year do. */
+/* The index language again, and the same shape: the school's own mark in the
+   shared 64px box, the name, credential, and place beside it, the year last. */
 .eduRow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
   gap: 18px;
   align-items: start;
   padding: 16px 6px;
@@ -355,7 +354,8 @@
   color: var(--muted);
 }
 
-.eduDate {
+/* Set on the school's first line, the way the publication year is. */
+.eduYear {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--muted);
@@ -393,6 +393,16 @@
 }
 
 .galleryTileTall {
+  grid-row: span 2;
+}
+
+/* A tile whose photo is fitted rather than cropped. The pair shot is a wide
+   frame whose subject runs the full width of it, so `cover` cuts the rowers and
+   their boat out of the tile; this one is contained and centred instead, and
+   the tile ground carries it as a mat, the same trade `.rowThumbPlate` makes
+   for the publication's wide figure. It takes the tall tile's height with it so
+   the mosaic row it sits in still runs level. */
+.galleryTileFit {
   grid-row: span 2;
 }
 
@@ -471,6 +481,12 @@
   object-fit: cover;
 }
 
+/* The whole frame, centred on its ground. `cover`'s counterpart, for art the
+   box must not crop. */
+.contain {
+  object-fit: contain;
+}
+
 /* The portrait is a square shot cropped to a taller frame, and Jaiden sits well
    right of the source's centre. `cover` only has ~33px of width to give away
    here, so it takes nearly all of it to bring his face to the middle. */
@@ -496,7 +512,8 @@
      instead of being cut. The row gap tightens so it reads as part of that
      body rather than as a third block. */
   .row,
-  .pubRow {
+  .pubRow,
+  .eduRow {
     grid-template-columns: 52px minmax(0, 1fr);
     row-gap: 8px;
   }
@@ -511,19 +528,15 @@
   }
 
   .rowYear,
-  .pubYear {
+  .pubYear,
+  .eduYear {
     grid-column: 2;
     padding-top: 0;
   }
 
-  /* The education row has no tile to sit beside, so it stacks outright and its
-     date drops under the body the way the years above it do. */
-  .eduRow {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 8px;
-  }
-
-  .eduDate {
-    padding-top: 0;
+  /* A tile is barely wider than the photo's own frame at this width, so the
+     fitted tile keeps a single row rather than sitting in a deep mat. */
+  .galleryTileFit {
+    grid-row: auto;
   }
 }
