@@ -17,11 +17,9 @@ const LABEL = "#b3aa98";
 /**
  * Each entry is 2x the CSS box of its slot. Only the gallery tiles Jaiden has
  * not supplied a photo for are still listed: the portrait, both project
- * thumbnails, and two of the six tiles now carry real art.
+ * thumbnails, and two of the four tiles now carry real art.
  */
 const slots = [
-  { file: "life-tea.svg", width: 360, height: 240, label: "tea" },
-  { file: "life-volleyball.svg", width: 360, height: 240, label: "volleyball" },
   { file: "life-kyoto.svg", width: 360, height: 240, label: "travel — kyoto" },
   { file: "life-alps.svg", width: 360, height: 496, label: "travel — alps" },
 ];

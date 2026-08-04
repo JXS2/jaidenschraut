@@ -10,21 +10,13 @@ const EMAIL = "x.schraut@gmail.com";
 const INTRO =
   "Hi — I'm a new-grad software engineer, just starting out. Most of what I know I've learned by building things I wanted to exist. I'm curious, I ask a lot of questions, and I like work where I get to figure things out as I go.";
 
-const CURRENTLY =
-  " learning about AI developmental trajectory and thinking through early-career strategy.";
-
 const STATEMENT =
   "Rowing, geopolitics, tea, beach volleyball — and travelling whenever I can.";
 
-/**
- * TODO(content): carried over verbatim from the approved mockup and not yet
- * confirmed by Jaiden. "SF / remote" and "Open to roles" are claims about him,
- * so they need a yes before this goes live; edit or drop entries here.
- */
+/** Both entries are confirmed claims about Jaiden; the first carries the weight. */
 const HEADER_META: { text: string; strong?: boolean }[] = [
-  { text: "SF / remote", strong: true },
+  { text: "Chicago", strong: true },
   { text: "Currently — Lovelytics" },
-  { text: "Open to roles" },
 ];
 
 /**
@@ -62,16 +54,15 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     title: "Slash",
-    description: "A side project I built and shipped end to end. Still tinkering with it.",
+    description: "Unreleased app, due Fall 2026.",
     year: "2025",
     href: "https://theslash.app",
     thumb: { kind: "image", src: "/thumbs/slash-logo.png", alt: "The Slash app icon" },
     links: [{ label: "live → theslash.app", href: "https://theslash.app" }],
   },
   {
-    title: "rent-a-rower",
-    description:
-      "Came out of rowing — a small tool for connecting rowers with people who need a hand.",
+    title: "Rent-a-Rower",
+    description: "Attempting to optimize fundraising for collegiate rowing teams.",
     year: "2024",
     href: "https://rent-a-rower.com",
     thumb: {
@@ -91,6 +82,8 @@ type Publication = {
   year: string;
   /** Empty string renders the entry as plain text instead of a link. */
   url: string;
+  /** A plate of the paper's own artwork under the citation. Optional. */
+  figure?: { src: string; width: number; height: number; alt: string; caption: string };
 };
 
 const PUBLICATIONS: Publication[] = [
@@ -101,11 +94,21 @@ const PUBLICATIONS: Publication[] = [
     venue: "First author · Discover Artificial Intelligence",
     year: "2023",
     url: "https://doi.org/10.1007/s44163-022-00045-1",
+    /* Fig. 1 of the paper itself, reused under its CC BY 4.0 licence. */
+    figure: {
+      src: "/publications/unet-architecture.png",
+      width: 1200,
+      height: 957,
+      alt:
+        "Architecture diagram of the proposed multi-output network: a U-net encoder and decoder joined by skip connections produce a segmentation map, and a dense classification head branches off the latent layer.",
+      caption:
+        "Fig. 1: the paper's multi-output U-net, with a segmentation decoder and a classification head.",
+    },
   },
 ];
 
 /**
- * TODO(assets): the four `/photos/*.svg` tiles are still neutral placeholders
+ * TODO(assets): the two `/photos/*.svg` tiles are still neutral placeholders
  * on the placeholder ground, at the two tile sizes the mosaic uses. `tall`
  * doubles a tile's height; the grid reflows around whatever mix of tiles it is
  * given, so more real photos can simply replace entries here.
@@ -116,8 +119,6 @@ const GALLERY = [
     alt: "Holding the ACRA national championship team points trophy at the regatta site",
     tall: true,
   },
-  { image: "/photos/life-tea.svg", alt: "A pot of tea", tall: false },
-  { image: "/photos/life-volleyball.svg", alt: "A beach volleyball court", tall: false },
   { image: "/photos/life-kyoto.svg", alt: "Travelling in Kyoto", tall: false },
   { image: "/photos/life-alps.svg", alt: "Travelling in the Alps", tall: true },
   {
@@ -155,7 +156,7 @@ export default function Home() {
             alt="Portrait of Jaiden Schraut"
             fill
             sizes="118px"
-            className={styles.cover}
+            className={`${styles.cover} ${styles.portraitArt}`}
             priority
           />
         </div>
@@ -164,7 +165,7 @@ export default function Home() {
       <main>
         <section className={styles.section}>
           <div className={styles.sectionHead}>
-            <h2 className={styles.sectionLabel}>Selected work</h2>
+            <h2 className={styles.sectionLabel}>Personal projects</h2>
             <span className={styles.sectionCount}>{count(PROJECTS)}</span>
           </div>
           {PROJECTS.map((project) => (
@@ -243,29 +244,40 @@ export default function Home() {
               </>
             );
 
-            return publication.url ? (
-              <a
-                key={publication.title}
-                className={`${styles.pubRow} ${styles.pubRowLink}`}
-                href={publication.url}
-                target="_blank"
-                rel="noopener"
-              >
-                {body}
-              </a>
-            ) : (
-              <div key={publication.title} className={styles.pubRow}>
-                {body}
+            return (
+              <div key={publication.title} className={styles.pubEntry}>
+                {publication.url ? (
+                  <a
+                    className={`${styles.pubRow} ${styles.pubRowLink}`}
+                    href={publication.url}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {body}
+                  </a>
+                ) : (
+                  <div className={styles.pubRow}>{body}</div>
+                )}
+                {/* The paper's own artwork, sitting outside the citation link so
+                    a click on the plate never navigates off the page. */}
+                {publication.figure ? (
+                  <figure className={styles.pubFigure}>
+                    <Image
+                      src={publication.figure.src}
+                      alt={publication.figure.alt}
+                      width={publication.figure.width}
+                      height={publication.figure.height}
+                      sizes="(max-width: 680px) 100vw, 420px"
+                      className={styles.pubFigureArt}
+                    />
+                    <figcaption className={styles.pubFigureCaption}>
+                      {publication.figure.caption}
+                    </figcaption>
+                  </figure>
+                ) : null}
               </div>
             );
           })}
-        </section>
-
-        <section className={styles.currently}>
-          <p className={styles.currentlyText}>
-            <span className={styles.currentlyLead}>Currently:</span>
-            {CURRENTLY}
-          </p>
         </section>
 
         <section className={styles.section}>

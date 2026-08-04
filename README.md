@@ -2,8 +2,8 @@
 
 Personal website for Jaiden Schraut. Next.js (App Router, TypeScript), deployed on Vercel.
 
-A single static page in a dense, index-forward layout: header, the work index, the publications
-index, a compact "Currently" plate, an "Off the clock" photo mosaic, footer links.
+A single static page in a dense, index-forward layout: header, the personal-projects index, the
+publications index, an "Off the clock" photo mosaic, footer links.
 No backend, no CMS, no client state.
 
 ## Running locally
@@ -32,8 +32,8 @@ npm run typecheck  # tsc --noEmit
 | `app/page.module.css` | Section-by-section layout |
 | `app/resume-dialog.tsx` | The résumé pop-up — the page's only client component |
 | `app/oar-mark.tsx` | A drawn oar, kept as the inset-mark thumbnail variant; no row uses it |
-| `public/` | `portrait.jpg`, `resume.pdf`, `gallery/`, `thumbs/` — the real assets |
-| `public/photos/` | Placeholder art for the four gallery slots still without a photo |
+| `public/` | `portrait.jpg`, `resume.pdf`, `gallery/`, `thumbs/`, `publications/` — the real assets |
+| `public/photos/` | Placeholder art for the two gallery slots still without a photo |
 | `scripts/generate-placeholders.mjs` | Regenerates that placeholder art |
 
 Fonts are Instrument Serif (400) for display, IBM Plex Sans (400/500) for body, and IBM Plex Mono
@@ -65,14 +65,12 @@ Replacing the résumé is a matter of overwriting `public/resume.pdf`.
 
 ## Still needs real values
 
-- **Five of the nine photo slots.** Real now: the portrait, the two project thumbnails, and two
-  of the six gallery tiles. The remaining four gallery tiles are the neutral placeholders in
+- **Two of the seven photo slots.** Real now: the portrait, the two project thumbnails, and two
+  of the four gallery tiles. The remaining two gallery tiles are the neutral placeholders in
   `public/photos/`, on the design's placeholder ground. Every slot sits in a box fixed by CSS, so
   dropping in a photo needs no layout change — add it under `public/gallery/` and point the
   `GALLERY` entry at it. Export at 2x the CSS box; `scripts/generate-placeholders.mjs` lists each
-  remaining slot's size.
-- **`HEADER_META`.** "SF / remote" and "Open to roles" came over from the approved mockup and are
-  not yet confirmed. They are claims about Jaiden, so they need a yes before they go live.
+  remaining slot's size. Jaiden intends to add more tiles than the four the mosaic now holds.
 
 Both project thumbnails are the projects' own logos rather than screenshots — neither site says
 anything legible at 64px. Slash uses its app icon from `theslash.app`; rent-a-rower uses the oar
@@ -80,8 +78,13 @@ mark it serves at `rent-a-rower.com/logo.png`. A `thumb` of `kind: "image"` fill
 edge; `app/oar-mark.tsx` is the drawn fallback that the inset treatment still exists for, and no
 row uses it now.
 
-Once the last four placeholders are gone, the three `images` lines in `next.config.ts` that allow
+Once the last two placeholders are gone, the three `images` lines in `next.config.ts` that allow
 SVG can go.
+
+The publications entry carries Fig. 1 of the paper itself, at
+`public/publications/unet-architecture.png`. The paper is Jaiden's own and open access under
+CC BY 4.0, so reusing its artwork is fine; the plate is capped well short of the column so it
+reads as a specimen of the work rather than a hero image.
 
 Both projects link only to their live site (`theslash.app`, `rent-a-rower.com`); both repositories
 are private, so neither row carries a repository link.

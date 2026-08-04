@@ -42,10 +42,14 @@ it like the handed-off sections and extend it in the same language rather than i
 - `--font-ibm-plex-mono` sets `adjustFontFallback: false`. The Google latin subset has no arrows
   block, so the "live →" glyph always comes from the fallback, and the metric-adjusted fallback
   stretched it. Keep the plain system-mono fallback unless that glyph goes away.
-- `next.config.ts` enables `dangerouslyAllowSVG` only because four gallery tiles still hold
+- `next.config.ts` enables `dangerouslyAllowSVG` only because two gallery tiles still hold
   locally authored SVG placeholders. Remove it once the last real photos land.
-- The gallery's six tiles leave two cells of the bottom row empty at desktop width. That is the
-  handoff's own arrangement and CSS, not a regression; do not "fix" the mosaic.
+- The gallery leaves cells of the bottom row empty at desktop width, and does so at whatever tile
+  count it currently holds. That is the handoff's own arrangement and CSS, not a regression; do
+  not "fix" the mosaic. Jaiden adds and removes tiles as photos arrive.
+- Publications is the one index whose rows are not uniform: `.pubEntry` owns the hairline so an
+  entry can hang its own artwork below the citation link, outside it, and a click on the plate
+  never navigates away. The figure is capped well short of the column on purpose.
 - Next's image optimizer caches by `url + w + q` in `.next/cache/images`, and the browser caches
   the same URL for a year. Editing a file in `public/` without renaming it keeps serving the old
   bytes locally long after the source changed — `rm -rf .next` and use a fresh browser profile

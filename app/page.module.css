@@ -241,14 +241,21 @@
 
 /* --------------------------------------------------------- 4. publications */
 
-/* Same index language, minus the thumbnail: publications carry no imagery. */
+/* The citation row and, under it, whatever artwork the entry carries. The rule
+   below owns the entry's top hairline so the plate reads as part of the row. */
+.pubEntry {
+  border-top: 1px solid var(--line);
+}
+
+/* Same index language as the work index, minus the thumbnail: a citation is
+   text first, and any figure the entry has sits beneath it rather than beside
+   it. This artwork is a diagram, and a 64px box would make it unreadable. */
 .pubRow {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 16px;
   align-items: baseline;
   padding: 12px 6px;
-  border-top: 1px solid var(--line);
 }
 
 .pubRowLink,
@@ -292,31 +299,38 @@
   white-space: nowrap;
 }
 
-/* ------------------------------------------------------------ 5. currently */
+/* A plate of the paper's own figure. It is capped well short of the column so
+   it reads as a specimen of the work rather than a hero image, and it keeps the
+   row's 6px inset so its left edge lines up with the citation above it. */
+.pubFigure {
+  margin: 0 6px 16px;
+  max-width: 420px;
+}
 
-.currently {
-  margin-top: var(--section-gap);
+/* The artwork is line-art on white, so the card ground and one hairline are all
+   it needs to sit on the paper; the intrinsic ratio keeps it from ever being
+   squashed. */
+.pubFigureArt {
+  width: 100%;
+  height: auto;
   background: var(--card);
-  border-left: 2px solid var(--accent);
-  border-radius: 0 var(--radius-plate) var(--radius-plate) 0;
-  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-thumb);
+  padding: 10px;
 }
 
-/* No measure cap: the plate is a single compact line at full width, which is
-   what keeps it reading as a status strip rather than a paragraph. */
-.currentlyText {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--body);
+/* --muted rather than the section count's --meta-faint: this is a sentence to
+   read, not an index marker to glance past. */
+.pubFigureCaption {
+  margin: 8px 0 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 420px;
 }
 
-.currentlyLead {
-  color: var(--accent);
-  font-weight: 500;
-}
-
-/* -------------------------------------------------------- 6. off the clock */
+/* -------------------------------------------------------- 5. off the clock */
 
 .statement {
   display: block;
@@ -349,7 +363,7 @@
   grid-row: span 2;
 }
 
-/* --------------------------------------------------------------- 7. footer */
+/* --------------------------------------------------------------- 6. footer */
 
 .footer {
   margin-top: var(--section-gap);
@@ -422,6 +436,13 @@
 
 .cover {
   object-fit: cover;
+}
+
+/* The portrait is a square shot cropped to a taller frame, and Jaiden sits well
+   right of the source's centre. `cover` only has ~24px of width to give away
+   here, so it takes nearly all of it to bring his face to the middle. */
+.portraitArt {
+  object-position: 92% 50%;
 }
 
 /* --------------------------------------------------------------- narrow */
