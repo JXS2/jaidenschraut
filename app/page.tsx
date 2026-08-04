@@ -1,16 +1,8 @@
 import Image from "next/image";
 import styles from "./page.module.css";
 
-/**
- * TODO(content): Jaiden still needs to supply the real values for these two.
- * They are the placeholders carried over from the design handoff.
- */
-const GITHUB_URL = "https://github.com/";
-const LINKEDIN_URL = "https://www.linkedin.com/";
-
-/** TODO(content): rent-a-rower has no live URL yet; it points at the GitHub placeholder. */
-const RENT_A_ROWER_URL = GITHUB_URL;
-
+const GITHUB_URL = "https://github.com/JXS2";
+const LINKEDIN_URL = "https://www.linkedin.com/in/jxschraut/";
 const EMAIL = "x.schraut@gmail.com";
 
 const INTRO =
@@ -23,27 +15,63 @@ const STATEMENT =
   "Rowing, geopolitics, tea, beach volleyball — and travelling whenever I can.";
 
 /**
- * TODO(assets): all six photos are neutral placeholders on the design's
- * placeholder ground (#efebe2), sized to the exact CSS boxes. Swapping in
- * Jaiden's real photos needs nothing but a new `src`.
+ * TODO(content): carried over verbatim from the approved mockup and not yet
+ * confirmed by Jaiden. "SF / remote" and "Open to roles" are claims about him,
+ * so they need a yes before this goes live; edit or drop entries here.
  */
-const projects = [
+const HEADER_META: { text: string; strong?: boolean }[] = [
+  { text: "SF / remote", strong: true },
+  { text: "Currently — Lovelytics" },
+  { text: "Open to roles" },
+];
+
+/**
+ * An artifact you can open for a project. Both projects are represented by
+ * their live site and nothing else: the repositories stay private.
+ */
+type ArtifactLink = {
+  label: string;
+  href: string;
+};
+
+type Project = {
+  title: string;
+  description: string;
+  year: string;
+  /** The row's primary destination. `null` leaves the title as plain text. */
+  href: string | null;
+  image: string;
+  alt: string;
+  links: ArtifactLink[];
+};
+
+/**
+ * TODO(assets): both thumbnails are neutral placeholders on the design's
+ * placeholder ground, sized to the exact 64px CSS box. Swapping in a real
+ * screenshot needs nothing but a new `image`.
+ *
+ * Both repositories are private, so each row carries its live site and no
+ * repository link.
+ */
+const PROJECTS: Project[] = [
   {
     title: "Slash",
-    url: "theslash.app",
-    href: "https://theslash.app",
     description: "A side project I built and shipped end to end. Still tinkering with it.",
+    year: "2025",
+    href: "https://theslash.app",
     image: "/photos/slash.svg",
     alt: "Screenshot of Slash",
+    links: [{ label: "live → theslash.app", href: "https://theslash.app" }],
   },
   {
     title: "rent-a-rower",
-    url: null,
-    href: RENT_A_ROWER_URL,
     description:
       "Came out of rowing — a small tool for connecting rowers with people who need a hand.",
+    year: "2024",
+    href: "https://rent-a-rower.com",
     image: "/photos/rent-a-rower.svg",
     alt: "Screenshot of rent-a-rower",
+    links: [{ label: "live → rent-a-rower.com", href: "https://rent-a-rower.com" }],
   },
 ];
 
@@ -56,171 +84,200 @@ type Publication = {
 };
 
 /**
- * TODO(content): every entry is a placeholder. Jaiden supplies the real
- * title / venue / year / url per publication; replacing this array is the
- * only edit the section needs.
+ * TODO(content): the one entry is a placeholder. Jaiden supplies the real
+ * title / venue / year / url; replacing this array is the only edit the
+ * section needs.
  */
 const PUBLICATIONS: Publication[] = [
-  { title: "[Publication title]", venue: "[Venue / where published]", year: "[Year]", url: "" },
-  { title: "[Publication title]", venue: "[Venue / where published]", year: "[Year]", url: "" },
-  { title: "[Publication title]", venue: "[Venue / where published]", year: "[Year]", url: "" },
+  {
+    title: "[Publication title]",
+    venue: "[Venue / where published]",
+    year: "[Year]",
+    url: "",
+  },
 ];
 
-const lifePhotos = [
-  { image: "/photos/life-rowing.svg", alt: "Rowing on the water" },
-  { image: "/photos/life-travel.svg", alt: "Travelling somewhere new" },
-  { image: "/photos/life-tea.svg", alt: "A pot of tea" },
+/**
+ * TODO(assets): six neutral placeholders on the placeholder ground, at the two
+ * tile sizes the mosaic uses. `tall` doubles a tile's height; the grid reflows
+ * around whatever mix of tiles it is given.
+ */
+const GALLERY = [
+  { image: "/photos/life-rowing.svg", alt: "Rowing on the water", tall: true },
+  { image: "/photos/life-tea.svg", alt: "A pot of tea", tall: false },
+  { image: "/photos/life-volleyball.svg", alt: "A beach volleyball court", tall: false },
+  { image: "/photos/life-kyoto.svg", alt: "Travelling in Kyoto", tall: false },
+  { image: "/photos/life-alps.svg", alt: "Travelling in the Alps", tall: true },
+  { image: "/photos/life-regatta.svg", alt: "A regatta on race day", tall: false },
 ];
+
+/** Section counts read as an index: 01, 02, 12. */
+const count = (items: unknown[]) => String(items.length).padStart(2, "0");
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <div className={styles.column}>
-        <header className={styles.header}>
-          <div className={styles.headerText}>
-            <div className={styles.eyebrow}>
-              <span className={styles.eyebrowMark} aria-hidden="true" />
-              <span className={styles.eyebrowText}>Consultant at Lovelytics</span>
-            </div>
-            <h1 className={styles.name}>Jaiden Schraut</h1>
-            <p className={styles.intro}>{INTRO}</p>
+      <header className={styles.header}>
+        <div>
+          <p className={styles.eyebrow}>
+            <span className={styles.eyebrowMark} aria-hidden="true" />
+            Consultant at Lovelytics
+          </p>
+          <h1 className={styles.name}>Jaiden Schraut</h1>
+          <p className={styles.lede}>{INTRO}</p>
+          <ul className={styles.headerMeta}>
+            {HEADER_META.map((item) => (
+              <li key={item.text} className={item.strong ? styles.headerMetaStrong : undefined}>
+                {item.text}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className={styles.portraitFrame}>
+          <Image
+            src="/photos/portrait.svg"
+            alt="Portrait of Jaiden Schraut"
+            fill
+            sizes="118px"
+            className={styles.cover}
+            priority
+          />
+        </div>
+      </header>
+
+      <main>
+        <section className={styles.section}>
+          <div className={styles.sectionHead}>
+            <h2 className={styles.sectionLabel}>Selected work</h2>
+            <span className={styles.sectionCount}>{count(PROJECTS)}</span>
           </div>
-          <div className={styles.portrait}>
-            <div className={styles.portraitFrame}>
-              <Image
-                src="/photos/portrait.svg"
-                alt="Portrait of Jaiden Schraut"
-                fill
-                sizes="248px"
-                className={styles.cover}
-                priority
-              />
-            </div>
-          </div>
-        </header>
-
-        <main className={styles.main}>
-          <section className={styles.section}>
-            <h2 className={styles.sectionLabel}>Projects</h2>
-            <div className={styles.projectGrid}>
-              {projects.map((project) => (
-                <a
-                  key={project.title}
-                  className={styles.card}
-                  href={project.href}
-                  target="_blank"
-                  rel="noopener"
-                >
-                  <div className={styles.cardImage}>
-                    <Image
-                      src={project.image}
-                      alt={project.alt}
-                      fill
-                      sizes="(max-width: 964px) 100vw, 450px"
-                      className={styles.cover}
-                    />
-                  </div>
-                  <div className={styles.cardBody}>
-                    <div className={styles.cardTitleRow}>
-                      <span className={styles.cardTitle}>{project.title}</span>
-                      {project.url ? (
-                        <span className={styles.cardUrl}>{project.url}</span>
-                      ) : null}
-                    </div>
-                    <p className={styles.cardDescription}>{project.description}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
-
-          <section className={styles.section}>
-            <h2 className={styles.sectionLabel}>Publications</h2>
-            <ul className={styles.publicationList}>
-              {PUBLICATIONS.map((publication, index) => {
-                const body = (
-                  <>
-                    <span className={styles.publicationTitle}>{publication.title}</span>
-                    <p className={styles.publicationMeta}>
-                      {publication.venue} · {publication.year}
-                    </p>
-                  </>
-                );
-
-                return (
-                  <li key={index}>
-                    {publication.url ? (
+          {PROJECTS.map((project) => (
+            <article
+              key={project.title}
+              className={`${styles.row} ${project.href ? styles.rowLinked : ""}`}
+            >
+              <div className={styles.rowThumb}>
+                <Image
+                  src={project.image}
+                  alt={project.alt}
+                  fill
+                  sizes="64px"
+                  className={styles.cover}
+                />
+              </div>
+              <div>
+                <h3 className={styles.rowTitle}>
+                  {project.href ? (
+                    <a
+                      className={styles.rowTitleLink}
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      {project.title}
+                    </a>
+                  ) : (
+                    project.title
+                  )}
+                </h3>
+                <p className={styles.rowDescription}>{project.description}</p>
+                <ul className={styles.rowLinks}>
+                  {project.links.map((link) => (
+                    <li key={link.label}>
                       <a
-                        className={`${styles.publication} ${styles.publicationLink}`}
-                        href={publication.url}
+                        className={styles.rowLink}
+                        href={link.href}
                         target="_blank"
                         rel="noopener"
                       >
-                        {body}
+                        {link.label}
                       </a>
-                    ) : (
-                      <div className={styles.publication}>{body}</div>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p className={styles.rowYear}>{project.year}</p>
+            </article>
+          ))}
+        </section>
 
-          <section className={styles.currently}>
-            <p className={styles.currentlyText}>
-              <span className={styles.currentlyLead}>Currently:</span>
-              {CURRENTLY}
-            </p>
-          </section>
-
-          <section className={styles.section}>
-            <h2 className={styles.sectionLabel}>Off the clock</h2>
-            <p className={styles.statement}>{STATEMENT}</p>
-            <div className={styles.photoRow}>
-              {lifePhotos.map((photo) => (
-                <div key={photo.image} className={styles.photoFrame}>
-                  <Image
-                    src={photo.image}
-                    alt={photo.alt}
-                    fill
-                    sizes="(max-width: 964px) 50vw, 300px"
-                    className={styles.cover}
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-        </main>
-
-        <footer className={styles.footer}>
-          <span className={styles.divider} aria-hidden="true" />
-          <div className={styles.footerLinks}>
-            <a
-              className={styles.footerLink}
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener"
-            >
-              GitHub
-            </a>
-            <a
-              className={styles.footerLink}
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener"
-            >
-              LinkedIn
-            </a>
-            <a
-              className={`${styles.footerLink} ${styles.footerLinkEmail}`}
-              href={`mailto:${EMAIL}`}
-            >
-              {EMAIL}
-            </a>
+        <section className={styles.section}>
+          <div className={styles.sectionHead}>
+            <h2 className={styles.sectionLabel}>Publications</h2>
+            <span className={styles.sectionCount}>{count(PUBLICATIONS)}</span>
           </div>
-        </footer>
-      </div>
+          {PUBLICATIONS.map((publication) => {
+            const body = (
+              <>
+                <div>
+                  <p className={styles.pubTitle}>{publication.title}</p>
+                  <p className={styles.pubVenue}>{publication.venue}</p>
+                </div>
+                <p className={styles.pubYear}>{publication.year}</p>
+              </>
+            );
+
+            return publication.url ? (
+              <a
+                key={publication.title}
+                className={`${styles.pubRow} ${styles.pubRowLink}`}
+                href={publication.url}
+                target="_blank"
+                rel="noopener"
+              >
+                {body}
+              </a>
+            ) : (
+              <div key={publication.title} className={styles.pubRow}>
+                {body}
+              </div>
+            );
+          })}
+        </section>
+
+        <section className={styles.currently}>
+          <p className={styles.currentlyText}>
+            <span className={styles.currentlyLead}>Currently:</span>
+            {CURRENTLY}
+          </p>
+        </section>
+
+        <section className={styles.section}>
+          <div className={styles.sectionHead}>
+            <h2 className={styles.sectionLabel}>Off the clock</h2>
+            <span className={styles.sectionCount}>gallery</span>
+          </div>
+          <p className={styles.statement}>{STATEMENT}</p>
+          <div className={styles.gallery}>
+            {GALLERY.map((tile) => (
+              <div
+                key={tile.image}
+                className={`${styles.galleryTile} ${tile.tall ? styles.galleryTileTall : ""}`}
+              >
+                <Image
+                  src={tile.image}
+                  alt={tile.alt}
+                  fill
+                  sizes="(max-width: 680px) 50vw, 260px"
+                  className={styles.cover}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <footer className={styles.footer}>
+        <a className={styles.footerLink} href={GITHUB_URL} target="_blank" rel="noopener">
+          GitHub
+        </a>
+        <a className={styles.footerLink} href={LINKEDIN_URL} target="_blank" rel="noopener">
+          LinkedIn
+        </a>
+        <a className={`${styles.footerLink} ${styles.footerLinkEmail}`} href={`mailto:${EMAIL}`}>
+          {EMAIL}
+        </a>
+      </footer>
     </div>
   );
 }

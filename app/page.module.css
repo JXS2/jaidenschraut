@@ -2,313 +2,336 @@
 
 .page {
   min-height: 100vh;
-  padding: var(--page-padding-top) var(--page-padding-side) var(--page-padding-bottom);
-}
-
-.column {
   max-width: var(--content-width);
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--section-gap);
-}
-
-/* Sections 2-5 sit inside <main>; it keeps the same rhythm as the page column
-   so the header, the four sections, and the footer share one even gap. */
-.main {
-  display: flex;
-  flex-direction: column;
-  gap: var(--section-gap);
+  padding: var(--page-padding-block) var(--page-padding-inline);
 }
 
 /* --------------------------------------------------------------- 1. header */
 
 .header {
-  display: flex;
-  gap: var(--header-gap);
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.headerText {
-  flex: 1 1 380px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: start;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
 }
 
 .eyebrow {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: var(--accent);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .eyebrowMark {
   display: block;
-  width: 24px;
+  flex: 0 0 auto;
+  width: 22px;
   height: 2px;
   background: var(--accent);
 }
 
-.eyebrowText {
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-
 .name {
-  margin: 0;
+  margin: 12px 0 0;
+  /* The serif ships one weight, so the mockup's optical 500 is the 400 face. */
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(46px, 7.5vw, 74px);
-  line-height: 1.02;
+  font-size: clamp(34px, 4.6vw, 50px);
+  line-height: 1.2;
   letter-spacing: -0.02em;
+  /* Instrument Serif's descenders sit low; this keeps them off the lede. */
+  padding: 0.04em 0 0.12em;
 }
 
-.intro {
-  margin: 0;
-  font-size: clamp(17px, 2vw, 19px);
-  line-height: 1.65;
+.lede {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--body);
-  max-width: 50ch;
+  max-width: 52ch;
   text-wrap: pretty;
 }
 
-.portrait {
-  flex: 0 0 auto;
-  width: clamp(180px, 26vw, 248px);
+.headerMeta {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.headerMetaStrong {
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .portraitFrame {
   position: relative;
-  width: 100%;
-  height: clamp(220px, 32vw, 300px);
-  border-radius: var(--radius-image);
+  width: 118px;
+  height: 142px;
+  border-radius: var(--radius-plate);
   overflow: hidden;
   background: var(--placeholder-ground);
 }
 
-/* ------------------------------------------------------------- 2. projects */
+/* -------------------------------------------------------------- 2. sections */
 
 .section {
+  margin-top: var(--section-gap);
+}
+
+.sectionHead {
   display: flex;
-  flex-direction: column;
-  gap: 22px;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
 }
 
 .sectionLabel {
   margin: 0;
+  font-size: 11.5px;
   font-weight: 500;
-  font-size: 12px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-.projectGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+.sectionCount {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--meta-faint);
 }
 
-.card,
-.card:hover {
-  color: var(--ink);
-}
+/* ------------------------------------------------------- 3. the work index */
 
-.card {
-  display: flex;
-  flex-direction: column;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-card);
-  overflow: hidden;
-}
-
-.card:hover {
-  border-color: var(--accent);
-  box-shadow: var(--card-hover-shadow);
-}
-
-/* The global focus ring rounds plain inline links to 3px; a card keeps its own
-   radius so the outline traces the card edge. */
-.card:focus-visible {
-  border-radius: var(--radius-card);
-}
-
-.cardImage {
+/* Each project is one scannable row: thumbnail, serif title, one line of
+   description, the artifacts you can actually open, and the year. */
+.row {
   position: relative;
-  width: 100%;
-  height: 172px;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: start;
+  padding: 16px 6px;
+  border-top: 1px solid var(--line);
+  transition: background 0.15s;
+}
+
+/* Only rows that actually go somewhere light up; a row with no destination
+   stays flat rather than promising a click it can't honour. */
+.rowLinked:hover {
+  background: var(--row-hover);
+}
+
+.rowThumb {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-thumb);
+  overflow: hidden;
   background: var(--placeholder-ground);
 }
 
-.cardBody {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 20px 22px 24px;
-}
-
-.cardTitleRow {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.cardTitle {
+.rowTitle {
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 26px;
-  line-height: 1.1;
-}
-
-.cardUrl {
-  font-size: 13px;
-  color: var(--accent);
-}
-
-.cardDescription {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-/* --------------------------------------------------------- 3. publications */
-
-/* Hairline rules rather than cards: publications carry no imagery, and the
-   rules keep this section legible between the project grid above and the
-   "Currently" plate below. */
-.publicationList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--line);
-}
-
-.publication {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.publicationTitle {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 26px;
-  line-height: 1.1;
-}
-
-.publicationMeta {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-/* Entries that have a url render as whole-row links and take the same hover
-   language as the cards and footer links: rule and title shift to the accent.
-   The row has no radius of its own, so the global 3px focus ring is correct
-   here and needs no restating. */
-.publicationLink,
-.publicationLink:hover {
+  font-size: 22px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.08em;
   color: var(--ink);
 }
 
-.publicationLink:hover {
-  border-bottom-color: var(--accent);
+.rowTitleLink,
+.rowTitleLink:hover {
+  color: var(--ink);
 }
 
-.publicationLink:hover .publicationTitle {
+/* The title carries the row's primary destination and stretches over the whole
+   row, so the hover ground and the click target are the same shape. The
+   artifact links below sit on top of it (z-index) and stay separately
+   clickable. */
+.rowTitleLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.rowDescription {
+  margin: 3px 0 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+.rowLinks {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+}
+
+.rowLink {
+  position: relative;
+  z-index: 1;
   color: var(--accent);
 }
 
-/* ------------------------------------------------------------ 4. currently */
-
-.currently {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  padding: 24px 26px;
-  background: var(--card);
-  border-left: 2px solid var(--accent);
-  border-radius: 0 var(--radius-image) var(--radius-image) 0;
+.rowLink:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
 }
 
+.rowYear {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  padding-top: 4px;
+}
+
+/* --------------------------------------------------------- 4. publications */
+
+/* Same index language, minus the thumbnail: publications carry no imagery. */
+.pubRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 12px 6px;
+  border-top: 1px solid var(--line);
+}
+
+.pubRowLink,
+.pubRowLink:hover {
+  color: var(--ink);
+}
+
+.pubRowLink:hover .pubTitle {
+  color: var(--accent);
+}
+
+.pubTitle {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--ink);
+  transition: color 0.15s;
+}
+
+.pubVenue {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.pubYear {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ 5. currently */
+
+.currently {
+  margin-top: var(--section-gap);
+  background: var(--card);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius-plate) var(--radius-plate) 0;
+  padding: 16px 18px;
+}
+
+/* No measure cap: the plate is a single compact line at full width, which is
+   what keeps it reading as a status strip rather than a paragraph. */
 .currentlyText {
   margin: 0;
-  font-size: clamp(16px, 1.8vw, 18px);
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.55;
   color: var(--body);
-  max-width: 52ch;
 }
 
 .currentlyLead {
   color: var(--accent);
+  font-weight: 500;
 }
 
-/* -------------------------------------------------------- 5. off the clock */
+/* -------------------------------------------------------- 6. off the clock */
 
 .statement {
-  margin: 0;
+  display: block;
+  margin: 6px 0 0;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(24px, 3.2vw, 32px);
-  line-height: 1.35;
+  font-size: 19px;
+  line-height: 1.3;
   color: var(--ink);
-  max-width: 34ch;
 }
 
-.photoRow {
+/* A mosaic rather than a row: two tiles run full height, the rest fill in
+   around them, and the whole thing reflows on its own as tiles are added. */
+.gallery {
+  margin-top: 14px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: 120px;
+  gap: 8px;
 }
 
-.photoFrame {
+.galleryTile {
   position: relative;
-  width: 100%;
-  height: clamp(150px, 20vw, 200px);
-  border-radius: var(--radius-image);
+  border-radius: var(--radius-thumb);
   overflow: hidden;
   background: var(--placeholder-ground);
 }
 
-/* --------------------------------------------------------------- 6. footer */
+.galleryTileTall {
+  grid-row: span 2;
+}
+
+/* --------------------------------------------------------------- 7. footer */
 
 .footer {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.divider {
-  display: block;
-  height: 1px;
-  background: var(--line);
-}
-
-.footerLinks {
+  margin-top: var(--section-gap);
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
 }
 
-/* line-height 1.6 keeps the effective touch target at 44px: 24 + 9 + 9 + 2. */
+/* min-height rather than padding alone: the mockup's 13.5px/1.6 button lands at
+   ~40px, and the spec's floor for a touch target is 44px. This is the one place
+   the render intentionally sits taller than the prototype. */
 .footerLink {
   display: inline-flex;
   align-items: center;
-  font-size: 15px;
+  min-height: 44px;
+  font-size: 13.5px;
   line-height: 1.6;
-  padding: 9px 18px;
-  border-radius: var(--radius-link);
+  padding: 8px 15px;
   border: 1px solid var(--line);
+  border-radius: var(--radius-link);
 }
 
 .footerLink,
@@ -321,6 +344,7 @@
   color: var(--accent);
 }
 
+/* The global focus ring rounds inline links to 3px; these keep their own. */
 .footerLink:focus-visible {
   border-radius: var(--radius-link);
 }
@@ -343,4 +367,30 @@
 
 .cover {
   object-fit: cover;
+}
+
+/* --------------------------------------------------------------- narrow */
+
+@media (max-width: 680px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  /* The year keeps its place in the index; it just drops under the row body
+     instead of being cut. The row gap tightens so it reads as part of that
+     body rather than as a third block. */
+  .row {
+    grid-template-columns: 52px minmax(0, 1fr);
+    row-gap: 8px;
+  }
+
+  .rowThumb {
+    width: 52px;
+    height: 52px;
+  }
+
+  .rowYear {
+    grid-column: 2;
+    padding-top: 0;
+  }
 }

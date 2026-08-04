@@ -8,28 +8,42 @@
   --line: #e2ddd3;
   --accent: #2f5d50;
   --accent-hover: #234439;
+  /* The mockup's `--ph`: the warm ground an empty photo slot sits on. */
   --placeholder-ground: #efebe2;
-  --card-hover-shadow: 0 6px 22px rgba(22, 23, 26, 0.07);
+  /* The label printed inside an empty photo slot. */
+  --placeholder-ink: #b3aa98;
+  /* Section counts: quieter than --muted so they never compete with the label. */
+  --meta-faint: #a49b8c;
+  /* Hover ground for an index row. */
+  --row-hover: #efeae1;
 
   /* Typography */
   --font-display: var(--font-instrument-serif), Georgia, serif;
   --font-body: var(--font-ibm-plex-sans), system-ui, sans-serif;
+  --font-mono: var(--font-ibm-plex-mono), ui-monospace, monospace;
 
   /* Spacing */
-  --section-gap: clamp(52px, 7vw, 84px);
-  --header-gap: clamp(28px, 5vw, 56px);
-  --page-padding-top: clamp(36px, 7vw, 104px);
-  --page-padding-side: clamp(22px, 6vw, 72px);
-  --page-padding-bottom: 72px;
+  --page-padding-block: 52px;
+  --page-padding-inline: 56px;
+  /* One gap between every section of the index. The dense layout runs on this
+     single value rather than a fluid scale. */
+  --section-gap: 34px;
 
   /* Radii */
-  --radius-card: 12px;
-  --radius-image: 10px;
+  --radius-plate: 9px;
+  --radius-thumb: 8px;
   --radius-link: 8px;
   --radius-focus: 3px;
 
   /* Widths */
-  --content-width: 920px;
+  --content-width: 1040px;
+}
+
+@media (max-width: 680px) {
+  :root {
+    --page-padding-block: 38px;
+    --page-padding-inline: 26px;
+  }
 }
 
 *,
@@ -47,6 +61,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
