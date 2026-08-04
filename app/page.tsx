@@ -152,7 +152,7 @@ export default function Home() {
             src="/portrait.jpg"
             alt="Portrait of Jaiden Schraut"
             fill
-            sizes="118px"
+            sizes="160px"
             className={`${styles.cover} ${styles.portraitArt}`}
             priority
           />

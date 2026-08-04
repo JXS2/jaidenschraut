@@ -75,10 +75,13 @@
   font-weight: 500;
 }
 
+/* Scaled up from 118x142 at the same proportion, so the crop below stays the
+   one that was chosen for it, and the frame still sits inside the height of
+   the name and lede beside it. */
 .portraitFrame {
   position: relative;
-  width: 118px;
-  height: 142px;
+  width: 160px;
+  height: 193px;
   border-radius: var(--radius-plate);
   overflow: hidden;
   background: var(--placeholder-ground);
@@ -415,7 +418,7 @@
 }
 
 /* The portrait is a square shot cropped to a taller frame, and Jaiden sits well
-   right of the source's centre. `cover` only has ~24px of width to give away
+   right of the source's centre. `cover` only has ~33px of width to give away
    here, so it takes nearly all of it to bring his face to the middle. */
 .portraitArt {
   object-position: 92% 50%;
