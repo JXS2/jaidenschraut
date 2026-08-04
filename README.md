@@ -71,9 +71,6 @@ Replacing the résumé is a matter of overwriting `public/resume.pdf`.
   dropping in a photo needs no layout change — add it under `public/gallery/` and point the
   `GALLERY` entry at it. Export at 2x the CSS box; `scripts/generate-placeholders.mjs` lists each
   remaining slot's size.
-- **The one publication.** The single entry in `PUBLICATIONS` is a placeholder and needs a real
-  `title`, `venue`, `year`, and `url`. An entry whose `url` is `""` renders as plain text rather
-  than a link, so a publication without a public link still reads correctly.
 - **`HEADER_META`.** "SF / remote" and "Open to roles" came over from the approved mockup and are
   not yet confirmed. They are claims about Jaiden, so they need a yes before they go live.
 
