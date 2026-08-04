@@ -104,11 +104,39 @@ const PUBLICATIONS: Publication[] = [
   },
 ];
 
+type School = {
+  name: string;
+  /** The degree, where there is one. A high school carries only its level. */
+  credential: string;
+  location: string;
+  /** Empty string leaves the row without a date rather than guessing one. */
+  date: string;
+};
+
 /**
- * TODO(assets): the two `/photos/*.svg` tiles are still neutral placeholders
- * on the placeholder ground, at the two tile sizes the mosaic uses. `tall`
- * doubles a tile's height; the grid reflows around whatever mix of tiles it is
- * given, so more real photos can simply replace entries here.
+ * Straight from `public/resume.pdf`, and only what it states: no GPA, no
+ * honours, and no dates the résumé doesn't carry.
+ */
+const EDUCATION: School[] = [
+  {
+    name: "University of Michigan",
+    credential: "Bachelor of Science, Data Science",
+    location: "Ann Arbor, MI",
+    date: "May 2026",
+  },
+  {
+    name: "Crystal Lake Central",
+    credential: "High school",
+    location: "Crystal Lake, IL",
+    date: "",
+  },
+];
+
+/**
+ * Every tile is now a real photo. `tall` doubles a tile's height; the grid
+ * reflows around whatever mix of tiles it is given, so a new photo is one more
+ * entry here and nothing else. Portrait shots want `tall`, so `cover` crops
+ * their width rather than their subject.
  */
 const GALLERY = [
   {
@@ -116,8 +144,11 @@ const GALLERY = [
     alt: "Holding the ACRA national championship team points trophy at the regatta site",
     tall: true,
   },
-  { image: "/photos/life-kyoto.svg", alt: "Travelling in Kyoto", tall: false },
-  { image: "/photos/life-alps.svg", alt: "Travelling in the Alps", tall: true },
+  {
+    image: "/gallery/graduation-family.jpg",
+    alt: "Graduating from Michigan with my parents",
+    tall: true,
+  },
   {
     image: "/gallery/rowing-pair.jpg",
     alt: "Two rowers in a pair, blades buried, on race day",
@@ -271,6 +302,26 @@ export default function Home() {
               </div>
             );
           })}
+        </section>
+
+        <section className={styles.section}>
+          <div className={styles.sectionHead}>
+            <h2 className={styles.sectionLabel}>Education</h2>
+            <span className={styles.sectionCount}>{count(EDUCATION)}</span>
+          </div>
+          {EDUCATION.map((school) => (
+            /* The same index row as the two above it, without the tile: there
+               is no artwork for a school, and an empty 64px box would read as a
+               thumbnail that failed to load. */
+            <div key={school.name} className={styles.eduRow}>
+              <div>
+                <h3 className={styles.eduSchool}>{school.name}</h3>
+                <p className={styles.eduCredential}>{school.credential}</p>
+                <p className={styles.eduLocation}>{school.location}</p>
+              </div>
+              {school.date ? <p className={styles.eduDate}>{school.date}</p> : null}
+            </div>
+          ))}
         </section>
 
         <section className={styles.section}>
