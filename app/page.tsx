@@ -87,17 +87,13 @@ type Publication = {
   url: string;
 };
 
-/**
- * TODO(content): the one entry is a placeholder. Jaiden supplies the real
- * title / venue / year / url; replacing this array is the only edit the
- * section needs.
- */
 const PUBLICATIONS: Publication[] = [
   {
-    title: "[Publication title]",
-    venue: "[Venue / where published]",
-    year: "[Year]",
-    url: "",
+    title:
+      "A multi-output network with U-net enhanced class activation map and robust classification performance for medical imaging analysis",
+    venue: "First author · Discover Artificial Intelligence",
+    year: "2023",
+    url: "https://doi.org/10.1007/s44163-022-00045-1",
   },
 ];
 
