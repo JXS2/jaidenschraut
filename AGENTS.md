@@ -41,26 +41,34 @@ a hairline on cream vanishes at 16px).
   the one place the render intentionally differs from the prototype (~40px there).
 - A project row's 64px box has two treatments, picked on `thumb.kind` in `app/page.tsx`:
   `.rowThumbImage` (real art, edge to edge, no ground so an icon's own corners stay clean) and
-  `.rowThumbMark` (a drawn mark, inset on the card ground with a hairline border). The narrow
-  breakpoint's padding tweak belongs to the mark variant only.
+  `.rowThumbMark` (a mark that brings no ground of its own, drawn or published on transparency,
+  inset on the card ground with a hairline border). The narrow breakpoint's padding tweak belongs
+  to the mark variant only.
 - A project row's title link is stretched over the whole row with `::after { inset: 0 }`, so the
   hover ground and the click target are one shape. Anything else clickable in a row needs
   `position: relative; z-index: 1` (see `.rowLink`) or the overlay swallows it.
 - `--font-ibm-plex-mono` sets `adjustFontFallback: false`. The Google latin subset has no arrows
   block, so the "live →" glyph always comes from the fallback, and the metric-adjusted fallback
   stretched it. Keep the plain system-mono fallback unless that glyph goes away.
-- Every image slot holds a real raster photo now, so `next.config.ts` carries no `images` config
-  and `dangerouslyAllowSVG` is gone. An SVG passed to `next/image` would need it back; prefer a
-  photo, or an inline component the way `app/oar-mark.tsx` is one, over re-enabling it.
+- `next.config.ts` carries no `images` config, and none is needed for the one SVG slot
+  (`public/thumbs/michigan-m.svg`): Next 16 skips the optimizer for a `src` ending in `.svg`, so it
+  is served straight from `public/` and `dangerouslyAllowSVG` stays off. Check the network panel:
+  an SVG that goes through `/_next/image` is the signal that something re-enabled it.
 - The gallery leaves cells of the bottom row empty at desktop width, and does so at whatever tile
   count it currently holds. That is the handoff's own arrangement and CSS, not a regression; do
   not "fix" the mosaic. Jaiden adds and removes tiles as photos arrive.
+- A `fit` tile in the gallery (`.galleryTileFit`) is the mosaic's one exception: a wide photo whose
+  subject fills its frame is contained and centred on the tile ground rather than cropped by
+  `cover`, and takes the tall tile's row span so its row still runs level. It drops back to one row
+  at the narrow breakpoint, where a tile is already close to the photo's own proportion.
 - A publication row is one link over the whole citation, thumbnail included, rather than a row
   with a stretched link inside it the way a project row is. So its tile art is decorative
   (`alt=""`): anything else there is read out ahead of the title that names the entry.
-- The education index (`.eduRow`) is the one index with no 64px tile, so its rows start at the
-  column the other indexes' thumbnails start at rather than at their text. That is deliberate: a
-  school has no artwork, and an empty box reads as a thumbnail that failed to load.
+- The education index (`.eduRow`) has the same three-column shape as the two above it, so a new
+  school needs a mark for its 64px tile: an empty box reads as a thumbnail that failed to load.
+  `logo.kind` picks the treatment: `image` for a mark that brings its own ground (Michigan's
+  block M is drawn at `public/thumbs/michigan-m.svg`), `mark` for one published on transparency,
+  which needs the tile's.
 - `.rowThumbPlate` is the third tile treatment, for real art that cannot fill the square, such as
   the publication's wide figure. It keeps `.rowThumb`'s size and framing and swaps the placeholder
   ground for paper white, so a fitted (not cropped) figure still reads as one filled tile.

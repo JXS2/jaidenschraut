@@ -47,9 +47,9 @@ Content lives in constants at the top of `app/page.tsx`: `PROJECTS`, `PUBLICATIO
 `GALLERY`, and `HEADER_META`. Adding an entry to any of them needs no layout change, and the
 section counts follow automatically.
 
-The education index carries only what `public/resume.pdf` states — institution, credential,
-place, and a date where the résumé gives one. It is the one index with no 64px tile: a school has
-no artwork, and an empty box would read as a thumbnail that failed to load.
+The education index carries only what `public/resume.pdf` states for the credential and the place,
+plus the year each school was finished and the school's own mark in the shared 64px tile. It has
+the same three-column shape as the two indexes above it.
 
 ## The résumé pop-up
 
