@@ -47,9 +47,12 @@ it like the handed-off sections and extend it in the same language rather than i
 - The gallery leaves cells of the bottom row empty at desktop width, and does so at whatever tile
   count it currently holds. That is the handoff's own arrangement and CSS, not a regression; do
   not "fix" the mosaic. Jaiden adds and removes tiles as photos arrive.
-- Publications is the one index whose rows are not uniform: `.pubEntry` owns the hairline so an
-  entry can hang its own artwork below the citation link, outside it, and a click on the plate
-  never navigates away. The figure is capped well short of the column on purpose.
+- A publication row is one link over the whole citation, thumbnail included, rather than a row
+  with a stretched link inside it the way a project row is. So its tile art is decorative
+  (`alt=""`): anything else there is read out ahead of the title that names the entry.
+- `.rowThumbPlate` is the third tile treatment, for real art that cannot fill the square, such as
+  the publication's wide figure. It keeps `.rowThumb`'s size and framing and swaps the placeholder
+  ground for paper white, so a fitted (not cropped) figure still reads as one filled tile.
 - Next's image optimizer caches by `url + w + q` in `.next/cache/images`, and the browser caches
   the same URL for a year. Editing a file in `public/` without renaming it keeps serving the old
   bytes locally long after the source changed — `rm -rf .next` and use a fresh browser profile

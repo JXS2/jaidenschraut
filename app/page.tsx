@@ -82,8 +82,12 @@ type Publication = {
   year: string;
   /** Empty string renders the entry as plain text instead of a link. */
   url: string;
-  /** A plate of the paper's own artwork under the citation. Optional. */
-  figure?: { src: string; width: number; height: number; alt: string; caption: string };
+  /**
+   * The paper's own artwork, in the index's shared 64px box. It carries no alt:
+   * the tile sits inside the citation link, so any description of it would be
+   * read out ahead of the title that actually names the entry.
+   */
+  thumb: { src: string };
 };
 
 const PUBLICATIONS: Publication[] = [
@@ -94,16 +98,9 @@ const PUBLICATIONS: Publication[] = [
     venue: "First author · Discover Artificial Intelligence",
     year: "2023",
     url: "https://doi.org/10.1007/s44163-022-00045-1",
-    /* Fig. 1 of the paper itself, reused under its CC BY 4.0 licence. */
-    figure: {
-      src: "/publications/unet-architecture.png",
-      width: 1200,
-      height: 957,
-      alt:
-        "Architecture diagram of the proposed multi-output network: a U-net encoder and decoder joined by skip connections produce a segmentation map, and a dense classification head branches off the latent layer.",
-      caption:
-        "Fig. 1: the paper's multi-output U-net, with a segmentation decoder and a classification head.",
-    },
+    /* Fig. 1 of the paper itself (the multi-output U-net, with a segmentation
+       decoder and a classification head), reused under its CC BY 4.0 licence. */
+    thumb: { src: "/publications/unet-architecture.png" },
   },
 ];
 
@@ -235,6 +232,19 @@ export default function Home() {
           {PUBLICATIONS.map((publication) => {
             const body = (
               <>
+                {/* The same tile the work index uses. A figure is wide rather
+                    than square, so it is fitted rather than cropped, and the
+                    tile keeps a paper ground behind it. Decorative here: see
+                    the type. */}
+                <div className={`${styles.rowThumb} ${styles.rowThumbPlate}`}>
+                  <Image
+                    src={publication.thumb.src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 680px) 52px, 64px"
+                    className={styles.markArt}
+                  />
+                </div>
                 <div>
                   <p className={styles.pubTitle}>{publication.title}</p>
                   <p className={styles.pubAuthors}>{publication.authors}</p>
@@ -244,37 +254,19 @@ export default function Home() {
               </>
             );
 
-            return (
-              <div key={publication.title} className={styles.pubEntry}>
-                {publication.url ? (
-                  <a
-                    className={`${styles.pubRow} ${styles.pubRowLink}`}
-                    href={publication.url}
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    {body}
-                  </a>
-                ) : (
-                  <div className={styles.pubRow}>{body}</div>
-                )}
-                {/* The paper's own artwork, sitting outside the citation link so
-                    a click on the plate never navigates off the page. */}
-                {publication.figure ? (
-                  <figure className={styles.pubFigure}>
-                    <Image
-                      src={publication.figure.src}
-                      alt={publication.figure.alt}
-                      width={publication.figure.width}
-                      height={publication.figure.height}
-                      sizes="(max-width: 680px) 100vw, 420px"
-                      className={styles.pubFigureArt}
-                    />
-                    <figcaption className={styles.pubFigureCaption}>
-                      {publication.figure.caption}
-                    </figcaption>
-                  </figure>
-                ) : null}
+            return publication.url ? (
+              <a
+                key={publication.title}
+                className={`${styles.pubRow} ${styles.pubRowLink}`}
+                href={publication.url}
+                target="_blank"
+                rel="noopener"
+              >
+                {body}
+              </a>
+            ) : (
+              <div key={publication.title} className={styles.pubRow}>
+                {body}
               </div>
             );
           })}

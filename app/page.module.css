@@ -158,6 +158,14 @@
   object-fit: cover;
 }
 
+/* Art that is real but can't fill a square, such as the publication's wide
+   figure. It keeps the tile's size and framing and drops the placeholder ground
+   for the paper white the figure itself sits on, so the plate reads as one
+   filled tile the way a logo does instead of a loose rectangle in the box. */
+.rowThumbPlate {
+  background: var(--card);
+}
+
 /* A thumbnail holding a drawn mark rather than art. The card ground and the
    inset are what stop a bare mark reading as a cropped image. */
 .rowThumbMark {
@@ -169,6 +177,8 @@
   color: var(--accent);
 }
 
+/* The fit for anything whose whole shape has to survive the square box: a drawn
+   mark, or the publication's wide diagram. `cover` would crop them. */
 .markArt {
   width: 100%;
   height: 100%;
@@ -241,21 +251,15 @@
 
 /* --------------------------------------------------------- 4. publications */
 
-/* The citation row and, under it, whatever artwork the entry carries. The rule
-   below owns the entry's top hairline so the plate reads as part of the row. */
-.pubEntry {
-  border-top: 1px solid var(--line);
-}
-
-/* Same index language as the work index, minus the thumbnail: a citation is
-   text first, and any figure the entry has sits beneath it rather than beside
-   it. This artwork is a diagram, and a 64px box would make it unreadable. */
+/* The same index language, and the same shape, as the work index: the paper's
+   own artwork in the shared 64px box, the citation beside it, the year last. */
 .pubRow {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 16px;
-  align-items: baseline;
-  padding: 12px 6px;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: start;
+  padding: 16px 6px;
+  border-top: 1px solid var(--line);
 }
 
 .pubRowLink,
@@ -292,42 +296,14 @@
   color: var(--muted);
 }
 
+/* Set on the title's first line the way `.rowYear` is, one step less because
+   the citation's title runs smaller than a project's. */
 .pubYear {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--muted);
   white-space: nowrap;
-}
-
-/* A plate of the paper's own figure. It is capped well short of the column so
-   it reads as a specimen of the work rather than a hero image, and it keeps the
-   row's 6px inset so its left edge lines up with the citation above it. */
-.pubFigure {
-  margin: 0 6px 16px;
-  max-width: 420px;
-}
-
-/* The artwork is line-art on white, so the card ground and one hairline are all
-   it needs to sit on the paper; the intrinsic ratio keeps it from ever being
-   squashed. */
-.pubFigureArt {
-  width: 100%;
-  height: auto;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-thumb);
-  padding: 10px;
-}
-
-/* --muted rather than the section count's --meta-faint: this is a sentence to
-   read, not an index marker to glance past. */
-.pubFigureCaption {
-  margin: 8px 0 0;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.5;
-  color: var(--muted);
-  max-width: 420px;
+  padding-top: 3px;
 }
 
 /* -------------------------------------------------------- 5. off the clock */
@@ -455,7 +431,8 @@
   /* The year keeps its place in the index; it just drops under the row body
      instead of being cut. The row gap tightens so it reads as part of that
      body rather than as a third block. */
-  .row {
+  .row,
+  .pubRow {
     grid-template-columns: 52px minmax(0, 1fr);
     row-gap: 8px;
   }
@@ -469,7 +446,8 @@
     padding: 7px;
   }
 
-  .rowYear {
+  .rowYear,
+  .pubYear {
     grid-column: 2;
     padding-top: 0;
   }
