@@ -1,0 +1,22 @@
+<!-- The JXS monogram in its small variant: at 16px a hairline on cream would
+     disappear, so the tab mark inverts to a filled accent tile. The colours are
+     the page's own tokens, spelled out because a standalone SVG cannot read
+     them: #2f5d50 is the accent, #f7f5f0 is the paper, and the sage X is that
+     accent lifted far enough to stay legible against it. XML comments cannot
+     carry a doubled hyphen, so the token names go unquoted here. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="JXS">
+  <rect width="64" height="64" rx="13" fill="#2f5d50" />
+  <!-- The tracking trails the S, so the anchor shifts half of it back to keep
+       the trio optically centred. -->
+  <text
+    x="31.4"
+    y="33"
+    text-anchor="middle"
+    dominant-baseline="central"
+    font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+    font-size="26"
+    font-weight="600"
+    letter-spacing="1.2"
+    fill="#f7f5f0"
+  >J<tspan fill="#a9c8bd">X</tspan>S</text>
+</svg>

@@ -133,6 +133,11 @@ export default function Home() {
     <div className={styles.page}>
       <header className={styles.header}>
         <div>
+          {/* The monogram opens the header. It carries no accessible name: the
+              h1 below it already says who this is. */}
+          <span className={styles.monogram} aria-hidden="true">
+            J<span className={styles.monogramX}>X</span>S
+          </span>
           <h1 className={styles.name}>Jaiden Schraut</h1>
           <p className={styles.lede}>{INTRO}</p>
           <ul className={styles.headerMeta}>

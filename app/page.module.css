@@ -18,7 +18,33 @@
   border-bottom: 1px solid var(--line);
 }
 
-/* The name opens the header, so it sits flush with the portrait beside it. */
+/* The JXS monogram opens the header, so it — not the name — is what sits flush
+   with the portrait beside it. It is the light variant of the mark the tab icon
+   carries: the card ground, hairline, and plate radius the index tiles already
+   use, so it reads as one of the page's own boxes rather than a badge dropped
+   on it. */
+.monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-plate);
+  background: var(--card);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  /* The tracking trails the S; the same lead re-centres the trio inside it. */
+  padding-left: 0.16em;
+}
+
+.monogramX {
+  color: var(--accent);
+}
+
 .name {
   margin: 0;
   /* The serif ships one weight, so the mockup's optical 500 is the 400 face. */
@@ -411,6 +437,13 @@
 @media (max-width: 680px) {
   .header {
     grid-template-columns: 1fr;
+  }
+
+  .monogram {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 14px;
+    font-size: 13px;
   }
 
   /* The year keeps its place in the index; it just drops under the row body

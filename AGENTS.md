@@ -25,6 +25,13 @@ Every token lives as a `:root` custom property in `app/globals.css`. Change valu
 inline. **Publications** is the one section in no external spec, added at Jaiden's request; treat
 it like the handed-off sections and extend it in the same language rather than inventing values.
 
+The **JXS monogram** is the one element `dense-variant.html` does not carry. It is specified
+inline in the airy `Jaiden Schraut v2.dc.html`, where its box and type are the binding values:
+J and S in `--ink`, only the X in `--accent`. It now exists in two variants that must stay in
+step — the light header tile in `app/page.module.css` (card ground, hairline, plate radius) and
+the inverted tab tile in `app/icon.svg` (accent ground, cream letters, sage `#a9c8bd` X, because
+a hairline on cream vanishes at 16px).
+
 ## Sharp edges
 
 - The global `a:focus-visible` rule sets `border-radius: 3px` so the focus ring hugs inline links.
