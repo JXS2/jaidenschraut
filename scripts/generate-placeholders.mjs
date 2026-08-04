@@ -14,17 +14,16 @@ import { fileURLToPath } from "node:url";
 const GROUND = "#efebe2";
 const LABEL = "#b3aa98";
 
-/** Each entry is 2x the CSS box of its slot. */
+/**
+ * Each entry is 2x the CSS box of its slot. Only the gallery tiles Jaiden has
+ * not supplied a photo for are still listed: the portrait, both project
+ * thumbnails, and two of the six tiles now carry real art.
+ */
 const slots = [
-  { file: "portrait.svg", width: 236, height: 284, label: "portrait" },
-  { file: "slash.svg", width: 128, height: 128, label: "slash", fontSize: 18 },
-  { file: "rent-a-rower.svg", width: 128, height: 128, label: "rower", fontSize: 18 },
-  { file: "life-rowing.svg", width: 360, height: 496, label: "rowing" },
   { file: "life-tea.svg", width: 360, height: 240, label: "tea" },
   { file: "life-volleyball.svg", width: 360, height: 240, label: "volleyball" },
   { file: "life-kyoto.svg", width: 360, height: 240, label: "travel — kyoto" },
   { file: "life-alps.svg", width: 360, height: 496, label: "travel — alps" },
-  { file: "life-regatta.svg", width: 360, height: 240, label: "a regatta" },
 ];
 
 /**

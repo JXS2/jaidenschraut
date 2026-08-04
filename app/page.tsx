@@ -1,4 +1,6 @@
 import Image from "next/image";
+import OarMark from "./oar-mark";
+import ResumeDialog from "./resume-dialog";
 import styles from "./page.module.css";
 
 const GITHUB_URL = "https://github.com/JXS2";
@@ -34,22 +36,26 @@ type ArtifactLink = {
   href: string;
 };
 
+/**
+ * What sits in a row's 64px box. Both projects carry a mark rather than a
+ * screenshot: neither site says anything legible at that size. Swapping a
+ * drawn mark for real art later is a change of `kind` and nothing else.
+ */
+type Thumb =
+  | { kind: "image"; src: string; alt: string }
+  | { kind: "oar"; label: string };
+
 type Project = {
   title: string;
   description: string;
   year: string;
   /** The row's primary destination. `null` leaves the title as plain text. */
   href: string | null;
-  image: string;
-  alt: string;
+  thumb: Thumb;
   links: ArtifactLink[];
 };
 
 /**
- * TODO(assets): both thumbnails are neutral placeholders on the design's
- * placeholder ground, sized to the exact 64px CSS box. Swapping in a real
- * screenshot needs nothing but a new `image`.
- *
  * Both repositories are private, so each row carries its live site and no
  * repository link.
  */
@@ -59,8 +65,7 @@ const PROJECTS: Project[] = [
     description: "A side project I built and shipped end to end. Still tinkering with it.",
     year: "2025",
     href: "https://theslash.app",
-    image: "/photos/slash.svg",
-    alt: "Screenshot of Slash",
+    thumb: { kind: "image", src: "/thumbs/slash-logo.png", alt: "The Slash app icon" },
     links: [{ label: "live → theslash.app", href: "https://theslash.app" }],
   },
   {
@@ -69,8 +74,7 @@ const PROJECTS: Project[] = [
       "Came out of rowing — a small tool for connecting rowers with people who need a hand.",
     year: "2024",
     href: "https://rent-a-rower.com",
-    image: "/photos/rent-a-rower.svg",
-    alt: "Screenshot of rent-a-rower",
+    thumb: { kind: "oar", label: "An oar" },
     links: [{ label: "live → rent-a-rower.com", href: "https://rent-a-rower.com" }],
   },
 ];
@@ -98,17 +102,26 @@ const PUBLICATIONS: Publication[] = [
 ];
 
 /**
- * TODO(assets): six neutral placeholders on the placeholder ground, at the two
- * tile sizes the mosaic uses. `tall` doubles a tile's height; the grid reflows
- * around whatever mix of tiles it is given.
+ * TODO(assets): the four `/photos/*.svg` tiles are still neutral placeholders
+ * on the placeholder ground, at the two tile sizes the mosaic uses. `tall`
+ * doubles a tile's height; the grid reflows around whatever mix of tiles it is
+ * given, so more real photos can simply replace entries here.
  */
 const GALLERY = [
-  { image: "/photos/life-rowing.svg", alt: "Rowing on the water", tall: true },
+  {
+    image: "/gallery/rowing-trophy.jpg",
+    alt: "Holding the ACRA national championship team points trophy at the regatta site",
+    tall: true,
+  },
   { image: "/photos/life-tea.svg", alt: "A pot of tea", tall: false },
   { image: "/photos/life-volleyball.svg", alt: "A beach volleyball court", tall: false },
   { image: "/photos/life-kyoto.svg", alt: "Travelling in Kyoto", tall: false },
   { image: "/photos/life-alps.svg", alt: "Travelling in the Alps", tall: true },
-  { image: "/photos/life-regatta.svg", alt: "A regatta on race day", tall: false },
+  {
+    image: "/gallery/rowing-pair.jpg",
+    alt: "Two rowers in a pair, blades buried, on race day",
+    tall: false,
+  },
 ];
 
 /** Section counts read as an index: 01, 02, 12. */
@@ -135,7 +148,7 @@ export default function Home() {
         </div>
         <div className={styles.portraitFrame}>
           <Image
-            src="/photos/portrait.svg"
+            src="/portrait.jpg"
             alt="Portrait of Jaiden Schraut"
             fill
             sizes="118px"
@@ -156,14 +169,21 @@ export default function Home() {
               key={project.title}
               className={`${styles.row} ${project.href ? styles.rowLinked : ""}`}
             >
-              <div className={styles.rowThumb}>
-                <Image
-                  src={project.image}
-                  alt={project.alt}
-                  fill
-                  sizes="64px"
-                  className={styles.cover}
-                />
+              {/* A mark, not a photo: it sits inset on the card ground rather
+                  than bleeding to the edges of the box. */}
+              <div className={`${styles.rowThumb} ${styles.rowThumbMark}`}>
+                {project.thumb.kind === "image" ? (
+                  <Image
+                    src={project.thumb.src}
+                    alt={project.thumb.alt}
+                    width={128}
+                    height={128}
+                    sizes="46px"
+                    className={styles.markArt}
+                  />
+                ) : (
+                  <OarMark className={styles.markArt} label={project.thumb.label} />
+                )}
               </div>
               <div>
                 <h3 className={styles.rowTitle}>
@@ -274,6 +294,7 @@ export default function Home() {
         <a className={styles.footerLink} href={LINKEDIN_URL} target="_blank" rel="noopener">
           LinkedIn
         </a>
+        <ResumeDialog triggerClassName={`${styles.footerLink} ${styles.footerButton}`} />
         <a className={`${styles.footerLink} ${styles.footerLinkEmail}`} href={`mailto:${EMAIL}`}>
           {EMAIL}
         </a>

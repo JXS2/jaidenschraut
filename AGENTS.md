@@ -38,8 +38,17 @@ it like the handed-off sections and extend it in the same language rather than i
 - `--font-ibm-plex-mono` sets `adjustFontFallback: false`. The Google latin subset has no arrows
   block, so the "live →" glyph always comes from the fallback, and the metric-adjusted fallback
   stretched it. Keep the plain system-mono fallback unless that glyph goes away.
-- `next.config.ts` enables `dangerouslyAllowSVG` only because the nine photo slots currently hold
-  locally authored SVG placeholders. Remove it once real photos land.
+- `next.config.ts` enables `dangerouslyAllowSVG` only because four gallery tiles still hold
+  locally authored SVG placeholders. Remove it once the last real photos land.
+- The gallery's six tiles leave two cells of the bottom row empty at desktop width. That is the
+  handoff's own arrangement and CSS, not a regression; do not "fix" the mosaic.
+- Next's image optimizer caches by `url + w + q` in `.next/cache/images`, and the browser caches
+  the same URL for a year. Editing a file in `public/` without renaming it keeps serving the old
+  bytes locally long after the source changed — `rm -rf .next` and use a fresh browser profile
+  before concluding an asset renders wrong.
+- The résumé pop-up (`app/resume-dialog.tsx`) is the page's only client component. It leans on
+  the native `<dialog>` for the focus trap, Escape, inertness, and focus restore; keep it that
+  way rather than hand-rolling those. `README.md` covers what the component adds on top.
 
 ## Maintaining this file
 
@@ -47,3 +56,13 @@ Keep this file for knowledge useful to almost every future agent session in this
 Do not repeat what the codebase already shows; point to the authoritative file or command instead.
 Prefer rewriting or pruning existing entries over appending new ones.
 When updating this file, preserve this bar for all agents and keep entries concise.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
