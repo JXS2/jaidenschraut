@@ -29,6 +29,7 @@ npm run typecheck  # tsc --noEmit
 | `app/layout.tsx` | Document shell, metadata, and the three `next/font/google` families |
 | `app/page.tsx` | The whole page, plus the copy, link, and index constants |
 | `app/globals.css` | Design tokens as `:root` custom properties, plus base and link styles |
+| `app/icon.svg` | The JXS monogram as the favicon, picked up by App Router convention |
 | `app/page.module.css` | Section-by-section layout |
 | `app/resume-dialog.tsx` | The résumé pop-up — the page's only client component |
 | `app/oar-mark.tsx` | A drawn oar, kept as the inset-mark thumbnail variant; no row uses it |
