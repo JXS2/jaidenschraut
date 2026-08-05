@@ -91,13 +91,13 @@ const PROJECTS: Project[] = [
     title: "Rent-a-Rower",
     description: "Attempting to optimize fundraising for collegiate rowing teams.",
     year: "2026",
-    href: "https://rent-a-rower.com",
+    href: "https://rent-a-rower-demo.vercel.app/admin",
     thumb: {
       kind: "image",
       src: "/thumbs/rent-a-rower-logo.png",
       alt: "The rent-a-rower logo",
     },
-    links: [{ label: "live → rent-a-rower.com", href: "https://rent-a-rower.com" }],
+    links: [{ label: "live demo →", href: "https://rent-a-rower-demo.vercel.app/admin" }],
   },
 ];
 
@@ -211,7 +211,7 @@ export default function Home() {
           <span className={styles.monogram} aria-hidden="true">
             J<span className={styles.monogramX}>X</span>S
           </span>
-          <h1 className={styles.name}>Jaiden Schraut</h1>
+          <h1 className={styles.name}>Jaiden Xuan Schraut</h1>
           <p className={styles.lede}>{INTRO}</p>
           <ul className={styles.headerMeta}>
             {HEADER_META.map((item) => (
@@ -243,7 +243,7 @@ export default function Home() {
         <div className={styles.portraitFrame}>
           <Image
             src="/portrait.jpg"
-            alt="Portrait of Jaiden Schraut"
+            alt="Portrait of Jaiden Xuan Schraut"
             fill
             sizes="160px"
             className={`${styles.cover} ${styles.portraitArt}`}

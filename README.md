@@ -76,7 +76,8 @@ The publications entry carries Fig. 1 of the paper itself, at
 paper is Jaiden's own and open access under CC BY 4.0, so reusing its artwork is fine. A figure
 is wide rather than square, so it is fitted into the tile rather than cropped to fill it.
 
-Both projects link only to their live site (`theslash.app`, `rent-a-rower.com`); both repositories
+Both projects link only to something you can open: Slash to its live site (`theslash.app`),
+Rent-a-Rower to its demo admin page (`rent-a-rower-demo.vercel.app/admin`). Both repositories
 are private, so neither row carries a repository link.
 
 ## The company marks
