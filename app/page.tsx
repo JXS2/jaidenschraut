@@ -191,11 +191,6 @@ type GalleryTile = {
  */
 const GALLERY: GalleryTile[] = [
   {
-    image: "/gallery/graduation-family.jpg",
-    alt: "Graduating from Michigan with my parents",
-    tall: true,
-  },
-  {
     image: "/gallery/rowing-pair.jpg",
     alt: "Two rowers in a pair, blades buried, on race day",
     tall: false,
