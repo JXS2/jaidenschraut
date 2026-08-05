@@ -29,8 +29,11 @@ The **JXS monogram** is the one element `dense-variant.html` does not carry. It 
 inline in the airy `Jaiden Schraut v2.dc.html`, where its box and type are the binding values:
 J and S in `--ink`, only the X in `--accent`. It now exists in two variants that must stay in
 step — the light header tile in `app/page.module.css` (card ground, hairline, plate radius) and
-the inverted tab tile in `app/icon.svg` (accent ground, cream letters, sage `#a9c8bd` X, because
+the inverted tab tile in `app/icon.svg` (accent ground, cream letters, mint `#79e0c2` X, because
 a hairline on cream vanishes at 16px).
+The inverted tile has to carry "only the X in the accent" without the accent, which is already
+its ground, so there the X takes the brightest note instead: a mint far enough from the cream in
+both hue and value that at 16px it reads as the letter picked out, not the letter that faded.
 
 ## Sharp edges
 
