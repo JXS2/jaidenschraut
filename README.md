@@ -31,9 +31,8 @@ npm run typecheck  # tsc --noEmit
 | `app/globals.css` | Design tokens as `:root` custom properties, plus base and link styles |
 | `app/icon.svg` | The JXS monogram as the favicon, picked up by App Router convention |
 | `app/page.module.css` | Section-by-section layout |
-| `app/resume-dialog.tsx` | The résumé pop-up — the page's only client component |
 | `app/oar-mark.tsx` | A drawn oar, kept as the inset-mark thumbnail variant; no row uses it |
-| `public/` | `portrait.jpg`, `resume.pdf`, `gallery/`, `thumbs/`, `publications/` — the real assets |
+| `public/` | `portrait.jpg`, `gallery/`, `thumbs/`, `publications/` — the real assets |
 
 Fonts are Instrument Serif (400) for display, IBM Plex Sans (400/500) for body, and IBM Plex Mono
 (400/500) for the small meta lines (section counts, years, artifact links), all self-hosted
@@ -47,7 +46,7 @@ Content lives in constants at the top of `app/page.tsx`: `PROJECTS`, `PUBLICATIO
 `GALLERY`, and `HEADER_META`. Adding an entry to any of them needs no layout change, and the
 section counts follow automatically.
 
-The education index carries only what `public/resume.pdf` states for the credential and the place,
+The education index carries only what Jaiden's résumé states for the credential and the place,
 plus the year each school was finished and the school's own mark in the shared 64px tile. It has
 the same three-column shape as the two indexes above it.
 
@@ -56,25 +55,13 @@ to the words. "Currently — Lovelytics" carries two, Lovelytics and Databricks,
 is a Databricks company. Both are official marks, kept as SVG under `public/thumbs/`; see "The
 company marks" below.
 
-## The résumé pop-up
-
-The footer's "Résumé" button opens `public/resume.pdf` in a modal rather than downloading it or
-leaving the page. `app/resume-dialog.tsx` is the page's only client component and its only
-interactive state.
-
-It is built on the native `<dialog>` in modal mode, which supplies the focus trap, the Escape
-key, the inert page behind it, and focus restored to the trigger. What the component adds is the
-rest: closing on a backdrop click (guarded so a drag that starts inside the panel doesn't count),
-a body scroll lock, and mounting the `<iframe>` only while the modal is open so a visitor who
-never asks for the résumé never fetches it. A plain "Download PDF" link sits in the modal's
-footer for browsers that won't preview a PDF inline.
-
-Replacing the résumé is a matter of overwriting `public/resume.pdf`.
+The footer carries GitHub, LinkedIn, and the email address. There is no résumé link: the page is
+entirely server-rendered and holds no client component or interactive state.
 
 ## The photo slots
 
 Every slot now holds a real photo: the portrait, both project thumbnails, the publication figure,
-and all three gallery tiles. Each sits in a box fixed by CSS, so a new photo needs no layout
+and every gallery tile. Each sits in a box fixed by CSS, so a new photo needs no layout
 change — add it under `public/gallery/`, export at roughly 2x the CSS box, and point a `GALLERY`
 entry at it. Jaiden adds and removes tiles as photos arrive.
 

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import OarMark from "./oar-mark";
-import ResumeDialog from "./resume-dialog";
 import styles from "./page.module.css";
 
 const GITHUB_URL = "https://github.com/JXS2";
@@ -8,7 +7,7 @@ const LINKEDIN_URL = "https://www.linkedin.com/in/jxschraut/";
 const EMAIL = "x.schraut@gmail.com";
 
 const INTRO =
-  "Hi — I'm a new-grad software engineer, just starting out. Most of what I know I've learned by building things I wanted to exist. I'm curious, I ask a lot of questions, and I like work where I get to figure things out as I go.";
+  "I'm a generalist who values agency and taste. I think building the right things comes from developing deep understandings of the world, not from reading the market. Understanding is what lets you commit before the evidence arrives, and committing early is the only edge that doesn't get arbitraged.";
 
 const STATEMENT =
   "Rowing, geopolitics, tea, beach volleyball — and travelling whenever I can.";
@@ -149,8 +148,8 @@ type School = {
 };
 
 /**
- * Credentials and places are straight from `public/resume.pdf`, and only what
- * it states: no GPA and no honours. The years are the years each school was
+ * Credentials and places are straight from Jaiden's résumé, and only what it
+ * states: no GPA and no honours. The years are the years each school was
  * finished, so the index reads down its year column the way the two above it do.
  */
 const EDUCATION: School[] = [
@@ -191,11 +190,6 @@ type GalleryTile = {
  * wide shot whose subject runs the full frame wants `fit` instead.
  */
 const GALLERY: GalleryTile[] = [
-  {
-    image: "/gallery/rowing-trophy.jpg",
-    alt: "Holding the ACRA national championship team points trophy at the regatta site",
-    tall: true,
-  },
   {
     image: "/gallery/graduation-family.jpg",
     alt: "Graduating from Michigan with my parents",
@@ -442,7 +436,6 @@ export default function Home() {
         <a className={styles.footerLink} href={LINKEDIN_URL} target="_blank" rel="noopener">
           LinkedIn
         </a>
-        <ResumeDialog triggerClassName={`${styles.footerLink} ${styles.footerButton}`} />
         <a className={`${styles.footerLink} ${styles.footerLinkEmail}`} href={`mailto:${EMAIL}`}>
           {EMAIL}
         </a>

@@ -83,9 +83,9 @@ a hairline on cream vanishes at 16px).
   the same URL for a year. Editing a file in `public/` without renaming it keeps serving the old
   bytes locally long after the source changed — `rm -rf .next` and use a fresh browser profile
   before concluding an asset renders wrong.
-- The résumé pop-up (`app/resume-dialog.tsx`) is the page's only client component. It leans on
-  the native `<dialog>` for the focus trap, Escape, inertness, and focus restore; keep it that
-  way rather than hand-rolling those. `README.md` covers what the component adds on top.
+- The page carries no client component and no interactive state: every file under `app/` is a
+  server component. The résumé pop-up was the one exception and has been removed, so a
+  `"use client"` anywhere is a deliberate addition, not the house style.
 
 ## Maintaining this file
 

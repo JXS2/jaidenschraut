@@ -476,20 +476,6 @@
   border-radius: var(--radius-link);
 }
 
-/* The résumé trigger opens a dialog, so it is a button. This is everything it
-   needs to sit in the row as one more link-shaped target — including its own
-   focus ring, since the global one only reaches `a`. */
-.footerButton {
-  font-family: inherit;
-  background: none;
-  cursor: pointer;
-}
-
-.footerButton:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
 .footerLinkEmail,
 .footerLinkEmail:hover {
   color: var(--accent);
