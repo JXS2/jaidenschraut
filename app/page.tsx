@@ -10,7 +10,7 @@ const INTRO =
   "I'm a generalist who values agency and taste. I believe building the right things comes from developing deep understandings of the world. Check out my projects!";
 
 const STATEMENT =
-  "Rowing, geopolitics, tea, beach volleyball — and travelling whenever I can.";
+  "Rowing, geopolitics, tea, beach volleyball, and travelling whenever I can.";
 
 /**
  * A company mark that sits on a meta entry's own line. Far too small for the
@@ -400,7 +400,6 @@ export default function Home() {
         <section className={styles.section}>
           <div className={styles.sectionHead}>
             <h2 className={styles.sectionLabel}>Off the clock</h2>
-            <span className={styles.sectionCount}>gallery</span>
           </div>
           <p className={styles.statement}>{STATEMENT}</p>
           <div className={styles.gallery}>

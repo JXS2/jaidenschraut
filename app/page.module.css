@@ -114,14 +114,16 @@
 
 /* Scaled up from 118x142 at the same proportion, so the crop below stays the
    one that was chosen for it, and the frame still sits inside the height of
-   the name and lede beside it. */
+   the name and lede beside it. Carries no ground of its own: the photo below
+   is cropped by `cover` and so fills the box edge to edge, which leaves any
+   ground here to read as a box drawn around the picture rather than under it.
+   `overflow` stays because it is what clips the photo to the plate radius. */
 .portraitFrame {
   position: relative;
   width: 160px;
   height: 193px;
   border-radius: var(--radius-plate);
   overflow: hidden;
-  background: var(--placeholder-ground);
 }
 
 /* -------------------------------------------------------------- 2. sections */
