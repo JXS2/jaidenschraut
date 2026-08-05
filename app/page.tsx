@@ -7,7 +7,7 @@ const LINKEDIN_URL = "https://www.linkedin.com/in/jxschraut/";
 const EMAIL = "x.schraut@gmail.com";
 
 const INTRO =
-  "I'm a generalist who values agency and taste. I think building the right things comes from developing deep understandings of the world, not from reading the market. Understanding is what lets you commit before the evidence arrives, and committing early is the only edge that doesn't get arbitraged.";
+  "I'm a generalist who values agency and taste. I believe building the right things comes from developing deep understandings of the world. Check out my projects!";
 
 const STATEMENT =
   "Rowing, geopolitics, tea, beach volleyball — and travelling whenever I can.";
