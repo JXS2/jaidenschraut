@@ -78,9 +78,38 @@
   color: var(--muted);
 }
 
+/* An entry sets its own line, so a mark beside the text centres on it rather
+   than sitting on the mono baseline. */
+.headerMetaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .headerMetaStrong {
   color: var(--ink);
   font-weight: 500;
+}
+
+/* The company marks an entry carries. They read as one pair, so they sit closer
+   to each other than the pair sits to the words. */
+.metaMarks {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Height, not a box: the two marks have different proportions, and matching
+   their heights is what makes them sit level on the line. 16px is the floor at
+   which the Databricks mark's own hairlines still read as bricks rather than as
+   a pink smudge, and it still sits inside the 18px line box, so the row keeps
+   its height. They are the one place a mark on transparency goes without the
+   index tile's ground — at this size the hairline would read as noise around
+   the mark rather than as a frame for it. */
+.metaMark {
+  width: auto;
+  height: 16px;
+  flex: none;
 }
 
 /* Scaled up from 118x142 at the same proportion, so the crop below stays the

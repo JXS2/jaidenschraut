@@ -50,10 +50,11 @@ a hairline on cream vanishes at 16px).
 - `--font-ibm-plex-mono` sets `adjustFontFallback: false`. The Google latin subset has no arrows
   block, so the "live →" glyph always comes from the fallback, and the metric-adjusted fallback
   stretched it. Keep the plain system-mono fallback unless that glyph goes away.
-- `next.config.ts` carries no `images` config, and none is needed for the one SVG slot
-  (`public/thumbs/michigan-m.svg`): Next 16 skips the optimizer for a `src` ending in `.svg`, so it
-  is served straight from `public/` and `dangerouslyAllowSVG` stays off. Check the network panel:
-  an SVG that goes through `/_next/image` is the signal that something re-enabled it.
+- `next.config.ts` carries no `images` config, and none is needed for the SVG slots
+  (`public/thumbs/michigan-m.svg`, `lovelytics.svg`, `databricks.svg`): Next 16 skips the optimizer
+  for a `src` ending in `.svg`, so they are served straight from `public/` and `dangerouslyAllowSVG`
+  stays off. Check the network panel: an SVG that goes through `/_next/image` is the signal that
+  something re-enabled it.
 - The gallery leaves cells of the bottom row empty at desktop width, and does so at whatever tile
   count it currently holds. That is the handoff's own arrangement and CSS, not a regression; do
   not "fix" the mosaic. Jaiden adds and removes tiles as photos arrive.
@@ -61,6 +62,12 @@ a hairline on cream vanishes at 16px).
   subject fills its frame is contained and centred on the tile ground rather than cropped by
   `cover`, and takes the tall tile's row span so its row still runs level. It drops back to one row
   at the narrow breakpoint, where a tile is already close to the photo's own proportion.
+- The header meta row's company marks (`.metaMark`, from a `HEADER_META` entry's `marks`) are the
+  one place a mark on transparency goes without the index tile's ground and hairline: at 16px a
+  plate reads as noise around the mark rather than as a frame for it. 16px is also the floor at
+  which the Databricks mark's own hairlines still read as bricks, and it is the ceiling the 18px
+  line box sets, so the header keeps its height either way. Marks are height-matched, not boxed —
+  the two have different proportions, and equal heights are what make them sit level on the line.
 - A publication row is one link over the whole citation, thumbnail included, rather than a row
   with a stretched link inside it the way a project row is. So its tile art is decorative
   (`alt=""`): anything else there is read out ahead of the title that names the entry.
