@@ -57,7 +57,9 @@ a hairline on cream vanishes at 16px).
   something re-enabled it.
 - The gallery leaves cells of the bottom row empty at desktop width, and does so at whatever tile
   count it currently holds. That is the handoff's own arrangement and CSS, not a regression; do
-  not "fix" the mosaic. Jaiden adds and removes tiles as photos arrive.
+  not "fix" the mosaic. Jaiden adds and removes tiles as photos arrive. The track list is
+  `auto-fit`, so unused tracks collapse and whatever tiles remain stretch across the row: at one
+  tile the mosaic is a single full-width tile, still the CSS working as written.
 - A `fit` tile in the gallery (`.galleryTileFit`) is the mosaic's one exception: a wide photo whose
   subject fills its frame is contained and centred on the tile ground rather than cropped by
   `cover`, and takes the tall tile's row span so its row still runs level. It drops back to one row
