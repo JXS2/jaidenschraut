@@ -1,9 +1,15 @@
 <!-- The JXS monogram in its small variant: at 16px a hairline on cream would
      disappear, so the tab mark inverts to a filled accent tile. The colours are
      the page's own tokens, spelled out because a standalone SVG cannot read
-     them: #2f5d50 is the accent, #f7f5f0 is the paper, and the sage X is that
-     accent lifted far enough to stay legible against it. XML comments cannot
-     carry a doubled hyphen, so the token names go unquoted here. -->
+     them: #2f5d50 is the accent, #f7f5f0 is the paper, and the mint X is that
+     accent lightened and saturated until it is plainly its own colour rather
+     than a dimmed cream. That is what carries the page monogram's relationship
+     here, where the ground is inverted: the accent cannot mark the X against a
+     tile it already fills, so the X takes the brightest note instead. A paler
+     sage sits close enough to the cream in both hue and value that at 16px it
+     reads as the letter that faded, not the letter that was picked out. XML
+     comments cannot carry a doubled hyphen, so the token names go unquoted
+     here. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="JXS">
   <rect width="64" height="64" rx="13" fill="#2f5d50" />
   <!-- The tracking trails the S, so the anchor shifts half of it back to keep
@@ -18,5 +24,5 @@
     font-weight="600"
     letter-spacing="1.2"
     fill="#f7f5f0"
-  >J<tspan fill="#a9c8bd">X</tspan>S</text>
+  >J<tspan fill="#79e0c2">X</tspan>S</text>
 </svg>
