@@ -32,9 +32,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jaiden Schraut",
+  title: "Jaiden Xuan Schraut",
   description:
-    "Jaiden Schraut is a new-grad software engineer and consultant at Lovelytics who learns by building things he wanted to exist.",
+    "Jaiden Xuan Schraut is a new-grad software engineer and consultant at Lovelytics who learns by building things he wanted to exist.",
 };
 
 export default function RootLayout({
