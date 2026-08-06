@@ -284,6 +284,27 @@
   text-decoration: underline;
 }
 
+/* The way into a demo that opens on a login screen. It carries the artifact
+   line's mono and size, so it reads as a footnote to the link above it, and the
+   year's colour rather than the accent, so it never competes with the link for
+   the eye. It needs `.rowLink`'s z-index for a different reason: the title's
+   row-wide overlay would otherwise swallow the drag that selects the text. */
+.rowLogin {
+  position: relative;
+  z-index: 1;
+  margin: 5px 0 0;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* Each credential stays whole when the line wraps: a break inside an address is
+   a break inside the thing someone is about to copy. */
+.rowLoginValue {
+  white-space: nowrap;
+}
+
 .rowYear {
   font-family: var(--font-mono);
   font-size: 12px;
