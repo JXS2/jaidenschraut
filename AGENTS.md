@@ -63,6 +63,10 @@ both hue and value that at 16px it reads as the letter picked out, not the lette
   not "fix" the mosaic. Jaiden adds and removes tiles as photos arrive. The track list is
   `auto-fit`, so unused tracks collapse and whatever tiles remain stretch across the row: at one
   tile the mosaic is a single full-width tile, still the CSS working as written.
+- The mosaic is the one section with no heading and no count. It carried an "Off the clock" head
+  and a statement line until Jaiden asked for both to go, leaving the photos to stand alone; the
+  bare `<section>` is deliberate, so do not "restore" a label to it. `.sectionHead` and
+  `.sectionLabel` are still what every other section uses.
 - A `fit` tile in the gallery (`.galleryTileFit`) is the mosaic's one exception: a wide photo whose
   subject fills its frame is contained and centred on the tile ground rather than cropped by
   `cover`, and takes the tall tile's row span so its row still runs level. It drops back to one row

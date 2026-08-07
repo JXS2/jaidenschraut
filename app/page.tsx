@@ -7,10 +7,7 @@ const LINKEDIN_URL = "https://www.linkedin.com/in/jxschraut/";
 const EMAIL = "x.schraut@gmail.com";
 
 const INTRO =
-  "I'm a generalist who values agency and taste. I believe building the right things comes from developing deep understandings of the world. Check out my projects!";
-
-const STATEMENT =
-  "Rowing, geopolitics, tea, beach volleyball, and travelling whenever I can.";
+  "Generalist. Agency and judgement over credentials. Building in increasing ambition, on problems I experience. See below.";
 
 /**
  * A company mark that sits on a meta entry's own line. Far too small for the
@@ -421,11 +418,9 @@ export default function Home() {
           ))}
         </section>
 
+        {/* The mosaic stands on its own: the heading and the statement line that
+            used to introduce it are gone, and the photos carry the section. */}
         <section className={styles.section}>
-          <div className={styles.sectionHead}>
-            <h2 className={styles.sectionLabel}>Off the clock</h2>
-          </div>
-          <p className={styles.statement}>{STATEMENT}</p>
           <div className={styles.gallery}>
             {GALLERY.map((tile) => (
               <div
