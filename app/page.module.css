@@ -415,17 +415,7 @@
   padding-top: 3px;
 }
 
-/* -------------------------------------------------------- 6. off the clock */
-
-.statement {
-  display: block;
-  margin: 6px 0 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 19px;
-  line-height: 1.3;
-  color: var(--ink);
-}
+/* ------------------------------------------------------- 6. the photo mosaic */
 
 /* A mosaic rather than a row: two tiles run full height, the rest fill in
    around them, and the whole thing reflows on its own as tiles are added. */

@@ -3,7 +3,7 @@
 Personal website for Jaiden Schraut. Next.js (App Router, TypeScript), deployed on Vercel.
 
 A single static page in a dense, index-forward layout: header, the personal-projects index, the
-publications index, the education index, an "Off the clock" photo mosaic, footer links.
+publications index, the education index, an unheaded photo mosaic, footer links.
 No backend, no CMS, no client state.
 
 ## Running locally
