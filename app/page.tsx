@@ -7,7 +7,7 @@ const LINKEDIN_URL = "https://www.linkedin.com/in/jxschraut/";
 const EMAIL = "x.schraut@gmail.com";
 
 const INTRO =
-  "Generalist. Agency and judgement over credentials. Building in increasing ambition, on problems I experience. See below.";
+  "Generalist. Building in increasing ambition, on problems I experience.";
 
 /**
  * A company mark that sits on a meta entry's own line. Far too small for the
