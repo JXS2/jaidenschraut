@@ -99,7 +99,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: "Rent-a-Rower",
-    description: "Attempting to optimize fundraising for collegiate rowing teams.",
+    description: "Optimizing fundraising for collegiate rowing teams.",
     year: "2026",
     href: "https://rent-a-rower-demo.vercel.app/admin",
     thumb: {
