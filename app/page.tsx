@@ -61,17 +61,6 @@ type Thumb =
   | { kind: "image"; src: string; alt: string }
   | { kind: "oar"; label: string };
 
-/**
- * The account a visitor signs into a project's demo with, where the demo puts a
- * login in front of everything. Published deliberately: the deployment is an
- * isolated demo holding no real data, and the row is the only place a visitor
- * would think to look for a way in.
- */
-type DemoLogin = {
-  email: string;
-  password: string;
-};
-
 type Project = {
   title: string;
   description: string;
@@ -80,8 +69,11 @@ type Project = {
   href: string | null;
   thumb: Thumb;
   links: ArtifactLink[];
-  /** Omitted by a project whose live site opens without signing in. */
-  demoLogin?: DemoLogin;
+  /**
+   * What a visitor is walking into when the live link is a demo rather than the
+   * product. Omitted by a project whose link is the real thing.
+   */
+  demoNote?: string;
 };
 
 /**
@@ -101,14 +93,15 @@ const PROJECTS: Project[] = [
     title: "Rent-a-Rower",
     description: "Optimizing fundraising for collegiate rowing teams.",
     year: "2026",
-    href: "https://rent-a-rower-demo.vercel.app/admin",
+    href: "https://rent-a-rower-demo.vercel.app/",
     thumb: {
       kind: "image",
       src: "/thumbs/rent-a-rower-logo.png",
       alt: "The rent-a-rower logo",
     },
-    links: [{ label: "live demo →", href: "https://rent-a-rower-demo.vercel.app/admin" }],
-    demoLogin: { email: "jaiden@schraut.org", password: "password_good" },
+    links: [{ label: "live demo →", href: "https://rent-a-rower-demo.vercel.app/" }],
+    demoNote:
+      "A live demo on sample data: the booking page a team's supporters would see.",
   },
 ];
 
@@ -322,15 +315,10 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                {/* Sits under the link it belongs to, quieter than it, and
-                    above the title's row-wide overlay (z-index, in the CSS) so
-                    the credentials can actually be selected and copied. */}
-                {project.demoLogin && (
-                  <p className={styles.rowLogin}>
-                    demo login:{" "}
-                    <span className={styles.rowLoginValue}>{project.demoLogin.email}</span> /{" "}
-                    <span className={styles.rowLoginValue}>{project.demoLogin.password}</span>
-                  </p>
+                {/* Sits under the link it belongs to and quieter than it, so a
+                    visitor knows what the link opens before they follow it. */}
+                {project.demoNote && (
+                  <p className={styles.rowDemoNote}>{project.demoNote}</p>
                 )}
               </div>
               <p className={styles.rowYear}>{project.year}</p>
