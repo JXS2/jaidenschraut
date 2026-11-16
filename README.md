@@ -18,7 +18,7 @@ Other scripts:
 ```bash
 npm run build      # production build (prerenders / as static content)
 npm run start      # serve the production build
-npm run lint       # eslint
+npm run lint       # eslint + oxlint (anti-slop rules)
 npm run typecheck  # tsc --noEmit
 ```
 
