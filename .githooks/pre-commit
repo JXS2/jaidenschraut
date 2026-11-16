@@ -1,0 +1,5 @@
+#!/bin/sh
+# Oxlint (anti-slop) on staged JS/TS files, so violations fail before CI does.
+files=$(git diff --cached --name-only --diff-filter=ACMR -z -- '*.ts' '*.tsx' '*.js' '*.jsx' '*.mjs' '*.mts' | tr '\0' '\n')
+[ -z "$files" ] && exit 0
+echo "$files" | tr '\n' '\0' | xargs -0 npx --no-install oxlint
